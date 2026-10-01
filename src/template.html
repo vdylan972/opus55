@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LE HUB Beelix</title>
+<style>
+@font-face{font-family:'Outfit';font-weight:400;src:url({{FONT_400}}) format('truetype')}
+@font-face{font-family:'Outfit';font-weight:500;src:url({{FONT_500}}) format('truetype')}
+@font-face{font-family:'Outfit';font-weight:600;src:url({{FONT_600}}) format('truetype')}
+@font-face{font-family:'Outfit';font-weight:700;src:url({{FONT_700}}) format('truetype')}
+@font-face{font-family:'Outfit';font-weight:800;src:url({{FONT_800}}) format('truetype')}
+@font-face{font-family:'Outfit';font-weight:900;src:url({{FONT_900}}) format('truetype')}
+
+:root{
+  --night-1:#0d1a33; --night-2:#1b2f55;
+  --text:#e6e8ff; --cyan-1:#3fb6d8; --cyan-2:#8fe3ee; --turq:#7fd0d6;
+  --glass-bg:rgba(255,255,255,.10); --glass-border:rgba(255,255,255,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:#050b18;overflow:hidden}
+body{display:flex;align-items:center;justify-content:center;font-family:'Outfit',system-ui,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;flex:none;transform-origin:center center;
+  background:linear-gradient(135deg,var(--night-1) 0%,#13244a 55%,var(--night-2) 100%)}
+.layer{position:absolute;inset:0}
+
+/* ---------- Fond : taches floues ---------- */
+.blob{position:absolute;left:0;top:0;border-radius:50%;will-change:transform}
+#noise{position:absolute;inset:0;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#vignette{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(5,10,25,.55) 100%)}
+
+/* ---------- Utilitaires ---------- */
+.glass{background:var(--glass-bg);border:1.5px solid var(--glass-border);border-radius:40px;
+  -webkit-backdrop-filter:blur(28px) saturate(140%);backdrop-filter:blur(28px) saturate(140%);
+  box-shadow:0 30px 80px rgba(4,10,30,.45),inset 0 1px 0 rgba(255,255,255,.28)}
+.center-x{position:absolute;left:0;right:0;text-align:center}
+.cyan{background:linear-gradient(100deg,var(--cyan-1),var(--cyan-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hubgrad{background:linear-gradient(100deg,#eef0ff 0%,#c8c6ff 38%,#9fdcf4 70%,var(--cyan-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Logo beelix */
+.logo{position:absolute;font-weight:800;font-style:italic;letter-spacing:-.025em;line-height:1;white-space:nowrap}
+.logo span{display:block;padding:0 .12em .08em .04em}
+.logo .base{background:linear-gradient(100deg,var(--cyan-1),var(--cyan-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo .shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%);
+  background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Icônes */
+.ico{position:relative;border-radius:22%;filter:drop-shadow(0 14px 26px rgba(3,8,25,.45))}
+.ico img{display:block;width:100%;height:100%}
+.tile{width:100%;height:100%;border-radius:22%;position:relative;overflow:hidden;
+  background:
+    radial-gradient(110% 34% at 50% 50%,rgba(196,210,240,.55),rgba(196,210,240,0) 72%),
+    radial-gradient(60% 50% at 20% 100%,rgba(140,155,190,.45),transparent 70%),
+    linear-gradient(160deg,#2d4067 0%,#172a4c 48%,#334a72 100%);
+  border:1.5px solid rgba(165,190,235,.55);box-shadow:inset 0 2px 0 rgba(255,255,255,.12)}
+.tile svg{position:absolute;left:50%;top:50%;width:64%;height:64%;transform:translate(-50%,-50%)}
+
+/* ---------- Scène 2 ---------- */
+#s2text{top:395px}
+#s2text .line1{font-size:112px;font-weight:800;line-height:1.1;letter-spacing:-.01em}
+#s2text .line1 > span{display:inline-block;margin:0 .14em}
+#w3g{display:inline-block}
+#w3{display:inline-block;font-size:156px;font-weight:900;letter-spacing:.01em;padding:0 .04em}
+#sub{margin-top:26px;font-size:60px;font-weight:500;opacity:.92}
+.orb{position:absolute;left:0;top:0;width:170px;height:170px;opacity:0}
+
+/* ---------- Scène 3 ---------- */
+#s3head{top:290px}
+#pres{font-size:56px;font-weight:500;letter-spacing:.06em;opacity:.95}
+#bighub{display:inline-block;font-size:280px;font-weight:900;line-height:1;letter-spacing:-.01em;padding:0 .05em .04em;
+  filter:drop-shadow(0 0 40px rgba(143,227,238,.28))}
+#card{position:absolute;left:560px;top:420px;width:800px;height:500px;padding:46px 70px;text-align:center}
+#card .logo{position:relative;display:inline-block;font-size:64px}
+#card h2{margin-top:30px;font-size:50px;font-weight:700;line-height:1.15}
+#card p{margin-top:14px;font-size:27px;font-weight:400;opacity:.72}
+#gbtn{position:relative;margin:44px auto 0;width:560px;height:88px;border-radius:999px;background:#fff;color:#1d2433;
+  display:flex;align-items:center;justify-content:center;gap:20px;font-size:32px;font-weight:600;overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.25)}
+#gbtn svg{width:40px;height:40px}
+#ripple{position:absolute;left:0;top:0;width:640px;height:640px;margin:-320px 0 0 -320px;border-radius:50%;background:rgba(63,182,216,.35);opacity:0}
+#cursor{position:absolute;left:0;top:0;width:62px;height:62px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
+#ring{position:absolute;left:0;top:0;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:50%;border:4px solid rgba(255,255,255,.85);opacity:0}
+
+/* ---------- Scène 4 ---------- */
+#mailwrap{position:absolute;inset:0}
+#mail{position:absolute;left:400px;top:200px;width:1120px;height:660px;overflow:hidden;border-radius:36px}
+#mail .bar{height:76px;display:flex;align-items:center;padding:0 30px;gap:14px;border-bottom:1.5px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05)}
+#mail .dot{width:20px;height:20px;border-radius:50%}
+#mail .bar .ttl{margin-left:24px;font-size:28px;font-weight:600;opacity:.85}
+#mail .field{height:76px;display:flex;align-items:center;padding:0 44px;font-size:34px;border-bottom:1.5px solid rgba(255,255,255,.12)}
+#mail .field b{font-weight:600;opacity:.6;margin-right:18px}
+#mail .body{padding:40px 44px;font-size:56px;font-weight:600;line-height:1.35;white-space:pre-wrap}
+#caret{display:inline-block;width:5px;height:62px;margin-left:4px;vertical-align:-10px;background:var(--cyan-2);border-radius:3px}
+#send{position:absolute;right:40px;bottom:36px;padding:18px 44px;border-radius:999px;font-size:30px;font-weight:600;
+  background:linear-gradient(100deg,rgba(63,182,216,.55),rgba(143,227,238,.45));border:1.5px solid rgba(255,255,255,.3)}
+#stamp{position:absolute;left:50%;top:50%;padding:16px 64px 22px;border:14px solid #ff5d8f;border-radius:34px;
+  font-size:180px;font-weight:900;line-height:1;letter-spacing:.02em;white-space:nowrap;
+  color:#ff5d8f;background:rgba(38,14,42,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  text-shadow:0 0 30px rgba(255,93,143,.35);box-shadow:0 0 50px rgba(255,93,143,.30),inset 0 0 30px rgba(255,93,143,.25)}
+#stamp span{background:linear-gradient(100deg,#ff4d6d,#ff8fc8);-webkit-background-clip:text;background-clip:text;color:transparent}
+#adp{top:250px;font-size:96px;font-weight:800;line-height:1.12;padding:0 120px}
+#adp .w{display:inline-block;margin:0 .13em}
+#leetoWrap{position:absolute;left:830px;top:520px;width:260px;height:260px}
+#cse{top:820px;font-size:64px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:26px}
+#cse svg{width:74px;height:40px}
+
+/* ---------- Scène 5 ---------- */
+#hubheader{position:absolute;left:60px;top:36px;width:1800px;height:112px;border-radius:34px;display:flex;align-items:center;padding:0 44px}
+#hubheader .logo{position:relative;font-size:62px}
+#search{margin-left:80px;width:640px;height:62px;border-radius:999px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;padding:0 26px;gap:16px;font-size:25px;opacity:.75}
+#search svg{width:26px;height:26px}
+#hubheader .right{margin-left:auto;display:flex;align-items:center;gap:34px}
+#bell{position:relative;width:44px;height:44px}
+#bell i{position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#ff5d8f;border:2px solid #1b2f55}
+#avatar{width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,var(--cyan-1),#8a6cff);display:flex;align-items:center;justify-content:center;
+  border:2px solid rgba(255,255,255,.5)}
+#avatar svg{width:38px;height:38px}
+#hubtitle{position:absolute;left:170px;top:196px;font-size:38px;font-weight:700;opacity:.9}
+#hubtitle small{font-size:26px;font-weight:400;opacity:.65;margin-left:16px}
+#apps{position:absolute;inset:0}
+.app{position:absolute;width:190px;height:190px}
+.app .ico{width:190px;height:190px}
+.app .lbl{position:absolute;left:50%;top:206px;width:290px;margin-left:-145px;text-align:center;font-size:28px;font-weight:700;line-height:1.15;color:#fff;
+  text-shadow:0 2px 10px rgba(5,12,30,.6)}
+.ghost{position:absolute;width:190px;height:190px;opacity:0}
+.ghost .ico{width:190px;height:190px;filter:none}
+#chatbot{position:absolute;right:70px;bottom:52px;display:flex;align-items:center;gap:22px}
+#chatbot .pill{padding:16px 30px;border-radius:999px;font-size:30px;font-weight:700}
+#hexwrap{width:128px;height:128px;filter:drop-shadow(0 0 16px rgba(127,208,214,.55))}
+#hex{width:128px;height:128px;clip-path:polygon(50% 0,93.3% 25%,93.3% 75%,50% 100%,6.7% 75%,6.7% 25%);
+  background:linear-gradient(150deg,#8fe3ee 0%,#3fb6d8 45%,#3d5fb8 100%);display:flex;align-items:center;justify-content:center}
+#hex svg{width:66px;height:66px}
+
+/* ---------- Scène 6 ---------- */
+#fin{top:300px}
+#finhub{display:inline-block;font-size:260px;font-weight:900;line-height:1;padding:0 .05em .04em;filter:drop-shadow(0 0 44px rgba(143,227,238,.3))}
+#dispo{margin-top:22px;font-size:76px;font-weight:600}
+#pill{position:relative;display:inline-flex;margin-top:52px;padding:22px 64px 26px;border-radius:999px;font-size:62px;font-weight:700;overflow:hidden;letter-spacing:.01em}
+#pill .sh{position:absolute;top:0;bottom:0;left:0;width:180px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-300px) skewX(-20deg)}
+#logo2{right:84px;bottom:56px;font-size:72px}
+#logo2 span{padding-bottom:.1em}
+
+#flash{position:absolute;inset:0;background:radial-gradient(60% 55% at 50% 48%,rgba(235,240,255,.95),rgba(180,220,255,.25) 55%,transparent 80%);opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg" class="layer"><div id="blobs" class="layer"></div><div id="noise"></div><div id="vignette"></div></div>
+
+  <!-- Scène 2 : icônes en orbite -->
+  <div id="orbits" class="layer"></div>
+
+  <!-- Scène 1 : logo -->
+  <div id="logo1" class="logo" style="font-size:220px;left:960px;top:540px"><span class="base">beelix</span><span class="shine">beelix</span></div>
+
+  <!-- Scène 2 : la promesse -->
+  <div id="s2text" class="center-x">
+    <div class="line1"><span id="w1">Une</span><span id="w2">plateforme</span><span id="w3g"><span id="w3" class="cyan">UNIQUE</span></span></div>
+    <div id="sub">pour retrouver tous les liens utiles</div>
+  </div>
+
+  <!-- Scène 3 : la révélation -->
+  <div id="s3head" class="center-x">
+    <div id="pres">Beelix présente</div>
+    <div id="bighub" class="hubgrad">LE HUB</div>
+  </div>
+  <div id="card" class="glass">
+    <div class="logo"><span class="base">beelix</span></div>
+    <h2>Bienvenue sur le Hub Beelix</h2>
+    <p>Connectez-vous avec votre compte Beelix</p>
+    <div id="gbtn">
+      <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+      <span>Continuer avec Google</span>
+      <div id="ripple"></div>
+    </div>
+  </div>
+  <div id="ring"></div>
+  <div id="cursor"><svg viewBox="0 0 24 24" width="62" height="62"><path d="M4 2 L4 19.5 L8.4 15.6 L11.5 22.2 L14.6 20.8 L11.6 14.4 L17.6 14.4 Z" fill="#fff" stroke="#0d1a33" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
+
+  <!-- Scène 4 : le problème qui disparaît -->
+  <div id="mailwrap">
+    <div id="mail" class="glass">
+      <div class="bar"><span class="dot" style="background:#ff6b81"></span><span class="dot" style="background:#ffc861"></span><span class="dot" style="background:#5fd39a"></span><span class="ttl">Nouveau message</span></div>
+      <div class="field"><b>À :</b>rh@beelix.fr</div>
+      <div class="field"><b>Objet :</b>Question</div>
+      <div class="body"><span id="typed"></span><span id="caret"></span></div>
+      <div id="send">Envoyer</div>
+    </div>
+    <div id="stamp"><span>FINI !</span></div>
+  </div>
+  <div id="adp" class="center-x"></div>
+  <div id="leetoWrap"><div class="ico" style="width:260px;height:260px"><img id="leetoImg" alt="Leeto"></div></div>
+  <div id="cse" class="center-x"><span>CSE</span>
+    <svg viewBox="0 0 74 40"><path d="M4 20h60M48 6l16 14-16 14" fill="none" stroke="#8fe3ee" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>en <span class="cyan">1 clic</span></span></div>
+
+  <!-- Scène 5 : le HUB en action -->
+  <div id="hubheader" class="glass">
+    <div class="logo"><span class="base">beelix</span></div>
+    <div id="search"><svg viewBox="0 0 24 24" fill="none" stroke="#e6e8ff" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>Rechercher une application…</div>
+    <div class="right">
+      <div id="bell"><svg viewBox="0 0 24 24" width="44" height="44" fill="#e6e8ff"><path d="M12 2.5a6.5 6.5 0 0 0-6.5 6.5v3.6L3.6 16a1 1 0 0 0 .9 1.5h15a1 1 0 0 0 .9-1.5l-1.9-3.4V9A6.5 6.5 0 0 0 12 2.5zM9.2 19a2.9 2.9 0 0 0 5.6 0z"/></svg><i></i></div>
+      <div id="avatar"><svg viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.5" r="4.5"/><path d="M3.5 21c.8-4.4 4.3-7 8.5-7s7.7 2.6 8.5 7z"/></svg></div>
+    </div>
+  </div>
+  <div id="hubtitle">Mes applications <small>Tous vos liens utiles</small></div>
+  <div id="apps"></div>
+  <div id="chatbot">
+    <div class="pill glass">Chatbot</div>
+    <div id="hexwrap"><div id="hex"><svg viewBox="0 0 64 64" fill="#fff"><path d="M28 6c1.6 10.4 5.6 14.4 16 16-10.4 1.6-14.4 5.6-16 16-1.6-10.4-5.6-14.4-16-16 10.4-1.6 14.4-5.6 16-16z"/><path d="M47 34c.9 5.6 3 7.7 8.6 8.6-5.6.9-7.7 3-8.6 8.6-.9-5.6-3-7.7-8.6-8.6 5.6-.9 7.7-3 8.6-8.6z"/></svg></div></div>
+  </div>
+
+  <!-- Scène 6 : final -->
+  <div id="fin" class="center-x">
+    <div id="finhub" class="hubgrad">LE HUB</div>
+    <div id="dispo">disponible dès aujourd’hui</div>
+    <div id="pill" class="glass">hub.beelix.fr<span class="sh"></span></div>
+  </div>
+  <div id="logo2" class="logo"><span class="base">beelix</span></div>
+
+  <div id="flash"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+const IMG = {
+  boond:"{{boond-manager}}", linkedin:"{{linkedin-learning}}", academy:"{{beelix-academy}}",
+  aleex:"{{aleex}}", leeto:"{{leeto}}"
+};
+const NAVY = '#1b2f55';
+// Pictogrammes recréés (style verre dépoli bleu, pictogramme blanc)
+const PICTO = {
+  toolbox:`<svg viewBox="0 0 100 100"><path d="M37 31v-7a5 5 0 0 1 5-5h16a5 5 0 0 1 5 5v7" fill="none" stroke="#fff" stroke-width="7"/><rect x="12" y="31" width="76" height="52" rx="10" fill="#fff"/><rect x="12" y="49" width="76" height="5" fill="${NAVY}" opacity=".18"/><text x="50" y="72" text-anchor="middle" font-family="Outfit" font-weight="900" font-size="28" fill="${NAVY}">AI</text></svg>`,
+  payslip:`<svg viewBox="0 0 100 100"><path d="M26 10h34l18 18v58a5 5 0 0 1-5 5H26a5 5 0 0 1-5-5V15a5 5 0 0 1 5-5z" fill="#fff"/><path d="M60 10v13a5 5 0 0 0 5 5h13z" fill="#bfcbe4"/><rect x="31" y="34" width="22" height="5" rx="2.5" fill="${NAVY}" opacity=".55"/><rect x="31" y="45" width="38" height="5" rx="2.5" fill="${NAVY}" opacity=".35"/><rect x="31" y="56" width="30" height="5" rx="2.5" fill="${NAVY}" opacity=".35"/><text x="58" y="85" text-anchor="middle" font-family="Outfit" font-weight="800" font-size="24" fill="${NAVY}">€</text><rect x="31" y="67" width="38" height="2.5" rx="1.2" fill="${NAVY}" opacity=".25"/></svg>`,
+  palette:`<svg viewBox="0 0 100 100"><path d="M50 12C28 12 11 28 11 49s17 39 37 39c6 0 8.5-4.4 6.4-9.3-2-4.6.9-8.7 5.8-8.7H69c11.6 0 20-7.6 20-19.5C89 28.6 71.6 12 50 12z" fill="#fff"/><circle cx="31" cy="47" r="7" fill="${NAVY}"/><circle cx="41" cy="29" r="7" fill="${NAVY}" opacity=".8"/><circle cx="61" cy="27" r="7" fill="${NAVY}" opacity=".65"/><circle cx="75" cy="42" r="7" fill="${NAVY}" opacity=".5"/></svg>`,
+  folder:`<svg viewBox="0 0 100 100"><path d="M10 26a6 6 0 0 1 6-6h22l9 9h37a6 6 0 0 1 6 6v43a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6z" fill="#fff"/><path d="M10 38h80" stroke="${NAVY}" stroke-width="3" opacity=".18"/><path d="M41 52l-9 9 9 9M59 52l9 9-9 9" fill="none" stroke="${NAVY}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  wonder:`<svg viewBox="0 0 100 100"><text x="50" y="47" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="22" fill="#fff" letter-spacing="-.5">wonder</text><text x="50" y="70" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="22" fill="#fff" letter-spacing="-.5">miles</text><path d="M24 78c14 6 38 6 52 0" fill="none" stroke="#8fe3ee" stroke-width="3.5" stroke-linecap="round"/></svg>`
+};
+function iconHTML(key){
+  if (IMG[key]) return `<img src="${IMG[key]}" alt="">`;
+  return `<div class="tile">${PICTO[key]}</div>`;
+}
+
+// Grille du HUB (ordre de la storyboard)
+const APPS = [
+  ['boond','Boond Manager'],['linkedin','LinkedIn Learning'],['toolbox','Toolbox IA'],['academy','Beelix Academy'],['aleex','Sensibilisation obligatoire'],
+  ['folder','Dossier technique'],['leeto','CSE'],['wonder','Wondermiles'],['payslip','Fiches de paie'],['palette','Branding']
+];
+const COLX = i => 960 + ((i%5)-2)*318, ROWY = i => (i<5 ? 380 : 718);
+
+// PRNG déterministe
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const rnd = mulberry32(20261001);
+const R = (a,b)=>a+(b-a)*rnd();
+
+const $ = s=>document.querySelector(s);
+document.getElementById('leetoImg').src = IMG.leeto;
+
+/* ---------- Fond ---------- */
+const BLOBS = [
+  {c:'111,180,255', a:.50, s:1250, x:180,  y:120, ax:220, ay:140, sp:.23, ph:0.0},
+  {c:'127,208,214', a:.42, s:1100, x:1300, y:620, ax:240, ay:150, sp:.19, ph:1.7},
+  {c:'138,108,255', a:.30, s:1000, x:1350, y:-180,ax:200, ay:160, sp:.17, ph:3.1},
+  {c:'255,143,200', a:.16, s:900,  x:-150, y:620, ax:180, ay:120, sp:.21, ph:4.4},
+  {c:'61,111,216',  a:.45, s:1150, x:560,  y:420, ax:260, ay:170, sp:.15, ph:2.3},
+  {c:'127,208,214', a:.22, s:700,  x:820,  y:-160,ax:200, ay:100, sp:.27, ph:5.2}
+];
+const blobEls = BLOBS.map(b=>{
+  const d=document.createElement('div'); d.className='blob';
+  d.style.width=d.style.height=b.s+'px';
+  d.style.background=`radial-gradient(circle at 50% 50%, rgba(${b.c},${b.a}) 0%, rgba(${b.c},${b.a*.72}) 22%, rgba(${b.c},${b.a*.38}) 42%, rgba(${b.c},${b.a*.12}) 58%, rgba(${b.c},0) 70%)`;
+  $('#blobs').appendChild(d); return d;
+});
+
+/* ---------- Orbite (scène 2) ---------- */
+const ORB_KEYS=['boond','linkedin','leeto','wonder'];
+const orbEls = ORB_KEYS.map(k=>{
+  const d=document.createElement('div'); d.className='orb';
+  d.innerHTML=`<div class="ico" style="width:170px;height:170px">${iconHTML(k)}</div>`;
+  $('#orbits').appendChild(d); return d;
+});
+
+/* ---------- Grille + fantômes (scènes 5-6) ---------- */
+const appEls=[], ghostEls=[];
+APPS.forEach(([k,label],i)=>{
+  const d=document.createElement('div'); d.className='app';
+  d.style.left=(COLX(i)-95)+'px'; d.style.top=(ROWY(i)-95)+'px';
+  d.innerHTML=`<div class="ico">${iconHTML(k)}</div><div class="lbl">${label}</div>`;
+  const gs=[0,1].map(()=>{const g=document.createElement('div'); g.className='ghost';
+    g.style.left=d.style.left; g.style.top=d.style.top; g.innerHTML=`<div class="ico">${iconHTML(k)}</div>`;
+    $('#apps').appendChild(g); return g;});
+  $('#apps').appendChild(d); appEls.push(d); ghostEls.push(gs);
+});
+
+/* ---------- Texte ADP mot par mot ---------- */
+$('#adp').innerHTML = 'Les ADP ne recevront plus|ce genre de mails'.split('|')
+  .map(l=>'<div>'+l.split(' ').map(w=>`<span class="w">${w}</span>`).join('')+'</div>').join('');
+
+/* ---------- Saisie du mail ---------- */
+const MAIL = "Bonjour,\nC'est quoi la plateforme CSE svp ?";
+const T_TYPE = 15.0;
+const charT = []; { let acc=0; for (let i=0;i<MAIL.length;i++){ charT.push(acc); const ch=MAIL[i];
+  acc += ch===',' ? .10 : ch==='\n' ? .26 : ch===' ' ? .065 : R(.035,.06); } }
+const T_TYPED_END = T_TYPE + charT[charT.length-1] + .05;
+
+/* ---------- Rendu procédural (fond, orbite, saisie) ---------- */
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+function blobTime(t){ if(t<28) return t; if(t<30){const u=(t-28)/2; return 28+(1-(1-u)*(1-u));} return 29; }
+function frame(t){
+  const bt=blobTime(t);
+  BLOBS.forEach((b,i)=>{
+    const x=b.x+b.ax*Math.sin(bt*b.sp+b.ph), y=b.y+b.ay*Math.cos(bt*b.sp*.8+b.ph*1.3), s=1+.12*Math.sin(bt*b.sp*.6+b.ph);
+    blobEls[i].style.transform=`translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0) scale(${s.toFixed(4)})`;
+  });
+  // orbite floue
+  const T0=3.9, TC=7.35, TCD=1.05;
+  orbEls.forEach((el,i)=>{
+    if(t<T0||t>TC+TCD){el.style.opacity=0;return;}
+    const k=clamp((t-TC)/TCD), ek=k*k*k;               // convergence power3.in
+    const ang=i*Math.PI/2+.6+(t-T0)*.32+ek*1.2;
+    const r=1-ek, x=960+Math.cos(ang)*870*r, y=560+Math.sin(ang)*410*r;
+    const fade=clamp((t-T0)/.8);
+    const sc=(1-.75*ek)*(1+.05*Math.sin(t*1.6+i));
+    el.style.opacity=(.62*fade*(1-clamp((k-.55)/.45))).toFixed(3);
+    el.style.filter=`blur(${(3+2*ek).toFixed(2)}px)`;
+    el.style.transform=`translate3d(${(x-85).toFixed(2)}px,${(y-85).toFixed(2)}px,0) scale(${sc.toFixed(4)}) rotate(${(Math.sin(t*.9+i)*8).toFixed(2)}deg)`;
+  });
+  // saisie lettre par lettre + curseur clignotant
+  let n=0; for(let i=0;i<charT.length;i++){ if(t>=T_TYPE+charT[i]) n=i+1; }
+  $('#typed').textContent=MAIL.slice(0,n);
+  const typing = t>=T_TYPE && t<T_TYPED_END+.15;
+  const caretOn = t<14.5 || t>17.65 ? 0 : (typing ? 1 : (Math.floor((t-14.5)/.5)%2===0 ? 1 : 0));
+  $('#caret').style.opacity=caretOn;
+}
+
+/* ---------- Timeline GSAP ---------- */
+const tl = gsap.timeline({paused:true, defaults:{ease:'power3.out'}, onUpdate:()=>frame(tl.time())});
+
+// états initiaux
+gsap.set('#logo1',{xPercent:-50,yPercent:-50,opacity:0,scale:.82,filter:'blur(18px)'});
+gsap.set(['#w1','#w2','#w3g'],{opacity:0,y:70,filter:'blur(14px)'});
+gsap.set('#sub',{opacity:0,y:30,filter:'blur(10px)'});
+gsap.set('#s2text',{filter:'blur(0px)'});
+gsap.set('#pres',{opacity:0,y:24});
+gsap.set('#bighub',{opacity:0,scale:2.6,filter:'blur(24px) drop-shadow(0 0 40px rgba(143,227,238,.28))'});
+gsap.set('#s3head',{filter:'blur(0px)',transformOrigin:'50% 0%'});
+gsap.set('#card',{opacity:0,y:640,filter:'blur(0px)'});
+gsap.set('#cursor',{x:1560,y:1160,opacity:0,transformOrigin:'10px 5px',filter:'blur(0px) drop-shadow(0 6px 10px rgba(0,0,0,.4))'});
+gsap.set('#mail',{opacity:0,scale:.88,y:70,filter:'blur(12px)'});
+gsap.set('#mailwrap',{filter:'blur(0px)',transformOrigin:'50% 50%'});
+gsap.set('#stamp',{xPercent:-50,yPercent:-50,opacity:0,scale:2.8,rotation:-26});
+gsap.set('#adp .w',{opacity:0,y:50,filter:'blur(12px)'});
+gsap.set('#adp',{filter:'blur(0px)'});
+gsap.set('#leetoWrap',{opacity:0,scale:0,rotation:-14,filter:'blur(0px)'});
+gsap.set('#cse',{opacity:0,y:30,filter:'blur(0px)'});
+gsap.set('#hubheader',{opacity:0,y:-170,filter:'blur(0px)'});
+gsap.set('#hubtitle',{opacity:0,x:-40,filter:'blur(0px)'});
+gsap.set('.app .ico',{opacity:0,scale:.3,y:50});
+gsap.set('.app .lbl',{opacity:0,y:14});
+gsap.set('#chatbot',{opacity:0,filter:'blur(0px)'});
+gsap.set('#hexwrap',{scale:0,rotation:-60});
+gsap.set('#chatbot .pill',{opacity:0,x:40});
+gsap.set('#finhub',{opacity:0,scale:.45,filter:'blur(22px) drop-shadow(0 0 44px rgba(143,227,238,.3))'});
+gsap.set('#dispo',{opacity:0,y:36,filter:'blur(10px)'});
+gsap.set('#pill',{opacity:0,scale:.8,y:20});
+gsap.set('#logo2',{opacity:0,y:24});
+
+/* SCÈNE 1 — Ouverture (0 → 4 s) */
+tl.to('#logo1',{opacity:1,scale:1,filter:'blur(0px)',duration:1.4},0.3)
+  .fromTo('#logo1 .shine',{backgroundPosition:'100% 0'},{backgroundPosition:'0% 0',duration:1.15,ease:'power2.inOut'},1.55)
+  .to('#logo1',{y:-405,scale:.4,duration:1.25,ease:'power3.inOut'},2.85);
+
+/* SCÈNE 2 — La promesse (4 → 9 s) */
+tl.to('#w1',{opacity:1,y:0,filter:'blur(0px)',duration:.6},4.0)
+  .to('#w2',{opacity:1,y:0,filter:'blur(0px)',duration:.6},4.35)
+  .fromTo('#w3g',{scale:.55},{opacity:1,y:0,scale:1,filter:'blur(0px)',duration:.75,ease:'back.out(2.2)'},4.75)
+  .to('#w3',{scale:1.09,duration:.32,ease:'sine.inOut',yoyo:true,repeat:3},5.6)
+  .fromTo('#w3',{filter:'drop-shadow(0 0 0px rgba(143,227,238,0))'},{filter:'drop-shadow(0 0 30px rgba(143,227,238,.85))',duration:.32,ease:'sine.inOut',yoyo:true,repeat:3},5.6)
+  .to('#sub',{opacity:.92,y:0,filter:'blur(0px)',duration:.8},6.0)
+  .to(['#s2text','#logo1'],{opacity:0,filter:'blur(16px)',y:'-=30',duration:.6,ease:'power2.in'},8.4);
+
+/* SCÈNE 3 — La révélation (9 → 14 s) */
+tl.to('#pres',{opacity:.95,y:0,duration:.7},9.05)
+  .to('#bighub',{opacity:1,scale:1,filter:'blur(0px) drop-shadow(0 0 40px rgba(143,227,238,.28))',duration:.55,ease:'expo.out'},9.7)
+  .fromTo('#flash',{opacity:0},{opacity:.75,duration:.1,ease:'power1.in'},9.76)
+  .to('#flash',{opacity:0,duration:.7,ease:'power2.out'},9.86)
+  .to('#s3head',{y:-185,scale:.5,duration:.95,ease:'power3.inOut'},10.85)
+  .to('#card',{opacity:1,y:0,duration:1.05,ease:'power3.out'},11.0);
+// curseur + clic sur le bouton Google
+const card=$('#card'), btn=$('#gbtn');
+const BX = card.offsetLeft + btn.offsetLeft + btn.offsetWidth*0.5 + 70;
+const BY = card.offsetTop + btn.offsetTop + btn.offsetHeight*0.55;
+gsap.set('#ring',{x:BX,y:BY,scale:.2});
+gsap.set('#ripple',{x:btn.offsetWidth*0.5+70,y:btn.offsetHeight*0.55,scale:0});
+tl.to('#cursor',{opacity:1,duration:.3,ease:'none'},11.95)
+  .to('#cursor',{x:BX-10,y:BY-5,duration:1.05,ease:'power2.inOut'},11.95)
+  .to('#cursor',{scale:.8,duration:.09,ease:'power1.in'},13.05)
+  .to('#cursor',{scale:1,duration:.2,ease:'power2.out'},13.14)
+  .to('#gbtn',{scale:.965,duration:.09,ease:'power1.in'},13.05)
+  .to('#gbtn',{scale:1,duration:.35,ease:'back.out(3)'},13.14)
+  .fromTo('#ripple',{scale:0,opacity:.75},{immediateRender:false,scale:1,opacity:0,duration:.75,ease:'power2.out'},13.1)
+  .fromTo('#ring',{scale:.2,opacity:.9},{immediateRender:false,scale:1.25,opacity:0,duration:.65,ease:'power2.out'},13.1)
+  .to(['#s3head','#card'],{opacity:0,filter:'blur(14px)',duration:.6,ease:'power2.in'},13.6)
+  .to('#cursor',{opacity:0,filter:'blur(14px) drop-shadow(0 6px 10px rgba(0,0,0,.4))',duration:.6,ease:'power2.in'},13.6)
+  .to('#card',{y:-40,duration:.6,ease:'power2.in'},13.6);
+
+/* SCÈNE 4 — Le problème qui disparaît (14 → 21 s) */
+tl.to('#mail',{opacity:1,scale:1,y:0,filter:'blur(0px)',duration:.85},14.05)
+  .to('#stamp',{opacity:1,scale:1,rotation:-12,duration:.3,ease:'power4.in'},17.75)
+  .to('#mail',{x:'+=12',duration:.045,yoyo:true,repeat:5,ease:'sine.inOut'},18.05)
+  .to('#stamp',{scale:1.05,duration:.12,yoyo:true,repeat:1,ease:'sine.out'},18.05)
+  .to('#mailwrap',{scale:.12,opacity:0,filter:'blur(10px)',duration:.6,ease:'power3.in'},18.65)
+  .to('#adp .w',{opacity:1,y:0,filter:'blur(0px)',duration:.6,stagger:.075},19.15)
+  .to('#leetoWrap',{opacity:1,scale:1,rotation:0,duration:.85,ease:'back.out(2.4)'},19.95)
+  .to('#cse',{opacity:1,y:0,duration:.6},20.3)
+  .to(['#adp','#leetoWrap','#cse'],{opacity:0,y:'-=30',filter:'blur(12px)',duration:.5,ease:'power2.in'},20.6);
+
+/* SCÈNE 5 — Le HUB en action (21 → 26 s) */
+tl.to('#hubheader',{opacity:1,y:0,duration:.8},21.0)
+  .to('#hubtitle',{opacity:1,x:0,duration:.7},21.3)
+  .to('.app .ico',{opacity:1,scale:1,y:0,duration:.6,ease:'back.out(1.9)',stagger:.11},21.5)
+  .to('.app .lbl',{opacity:1,y:0,duration:.45,stagger:.11},21.68)
+  .to('#chatbot',{opacity:1,duration:.3,ease:'none'},23.15)
+  .to('#hexwrap',{scale:1,rotation:0,duration:.75,ease:'back.out(2)'},23.15)
+  .to('#chatbot .pill',{opacity:1,x:0,duration:.6},23.45)
+  .fromTo('#hexwrap',{filter:'drop-shadow(0 0 16px rgba(127,208,214,.55))'},{filter:'drop-shadow(0 0 34px rgba(127,208,214,.95))',duration:.55,yoyo:true,repeat:3,ease:'sine.inOut'},23.9)
+  // mise en avant de la tuile CSE
+  .to(appEls[6].querySelector('.ico'),{scale:1.1,y:-8,duration:.4,ease:'power2.out'},24.3)
+  .to(appEls[6].querySelector('.ico'),{scale:1,y:0,duration:.5,ease:'power2.inOut'},24.95);
+
+/* SCÈNE 6 — Final « envol des icônes » (26 → 32 s) */
+tl.to(['#hubheader','#hubtitle','#chatbot'],{opacity:0,filter:'blur(12px)',duration:.5,ease:'power2.in'},25.85)
+  .to('.app .lbl',{opacity:0,duration:.3,ease:'power1.in'},25.85);
+const FLY = APPS.map((a,i)=>{
+  const ca=R(0,Math.PI*2), cr=R(10,85);
+  const g={x:960+Math.cos(ca)*cr-COLX(i), y:545+Math.sin(ca)*cr*.8-ROWY(i), rotation:R(-25,25), scale:R(.62,.78)};
+  // direction : vers le haut et les bords (éventail de -165° à -15°, plus quelques-unes vers les côtés)
+  const ang = (-170 + i*(160/9) + R(-7,7)) * Math.PI/180;
+  const dist = R(1250,1550);
+  const e={x:g.x+Math.cos(ang)*dist, y:g.y+Math.sin(ang)*dist*.85 - R(80,260), rotation:g.rotation+R(-220,220), scale:R(.55,1.05)};
+  return {g,e,st:27.22+R(0,.16),d:R(1.65,2.05)};
+});
+// ordre de superposition aléatoire dans l'amas
+FLY.forEach((f,i)=>{ const el=appEls[i];
+  tl.to(el,{x:f.g.x,y:f.g.y,rotation:f.g.rotation,scale:f.g.scale,duration:.8,ease:'power3.inOut'},26.0+i*.025);
+});
+tl.to('#apps',{scale:.93,duration:.35,ease:'sine.inOut'},26.86)
+  .to('#apps',{scale:1,duration:.45,ease:'back.out(3)'},27.2);
+function flight(el,f,delay,peak){
+  tl.to(el,{x:f.e.x,duration:f.d,ease:'power2.out'},f.st+delay)
+    .to(el,{y:f.e.y,duration:f.d,ease:'power1.in'},f.st+delay)
+    .to(el,{rotation:f.e.rotation,scale:f.e.scale,duration:f.d,ease:'power1.out'},f.st+delay)
+    .to(el,{opacity:0,duration:.55,ease:'power1.in'},f.st+delay+f.d-.55);
+  if(peak!==undefined){
+    tl.set(el,{x:f.g.x,y:f.g.y,rotation:f.g.rotation,scale:f.g.scale,opacity:peak},f.st+delay-.001);
+  }
+}
+FLY.forEach((f,i)=>{
+  flight(appEls[i],f,0);
+  flight(ghostEls[i][0],f,.055,.38);
+  flight(ghostEls[i][1],f,.11,.18);
+});
+gsap.set(ghostEls.map(g=>g[0]),{filter:'blur(3px) drop-shadow(0 0 18px rgba(143,227,238,.8))'});
+gsap.set(ghostEls.map(g=>g[1]),{filter:'blur(7px) drop-shadow(0 0 24px rgba(143,227,238,.8))'});
+
+tl.to('#finhub',{opacity:1,scale:1,filter:'blur(0px) drop-shadow(0 0 44px rgba(143,227,238,.3))',duration:1.05,ease:'back.out(1.5)'},27.4)
+  .to('#dispo',{opacity:1,y:0,filter:'blur(0px)',duration:.8},28.0)
+  .to('#pill',{opacity:1,scale:1,y:0,duration:.8,ease:'back.out(1.8)'},28.4)
+  .fromTo('#pill .sh',{x:-300},{x:760,duration:.95,ease:'power2.inOut'},29.0)
+  .to('#logo2',{opacity:.9,y:0,duration:.8},29.1);
+// image finale figée jusqu'à 32 s
+tl.set({}, {}, 32);
+
+/* ---------- API de rendu ---------- */
+window.__tl = tl;
+window.__duration = tl.duration();
+window.__seek = t => { tl.seek(t,false); frame(t); };
+const imgs=[...document.images];
+window.__ready = Promise.all([document.fonts.ready, ...imgs.map(i=>i.decode().catch(()=>{}))]);
+
+const render = /[?&]render/.test(location.search);
+function fit(){ if(render) return; const s=Math.min(innerWidth/1920, innerHeight/1080); $('#stage').style.transform=`scale(${s})`; }
+addEventListener('resize',fit); fit();
+window.__seek(0);
+if(!render){ window.__ready.then(()=>{ tl.repeat(-1).repeatDelay(.5).play(0); }); }
+})();
+</script>
+</body>
+</html>
