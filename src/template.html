@@ -49,13 +49,6 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
 /* Icônes */
 .ico{position:relative;border-radius:22%;filter:drop-shadow(0 14px 26px rgba(3,8,25,.45))}
 .ico img{display:block;width:100%;height:100%}
-.tile{width:100%;height:100%;border-radius:22%;position:relative;overflow:hidden;
-  background:
-    radial-gradient(110% 34% at 50% 50%,rgba(196,210,240,.55),rgba(196,210,240,0) 72%),
-    radial-gradient(60% 50% at 20% 100%,rgba(140,155,190,.45),transparent 70%),
-    linear-gradient(160deg,#2d4067 0%,#172a4c 48%,#334a72 100%);
-  border:1.5px solid rgba(165,190,235,.55);box-shadow:inset 0 2px 0 rgba(255,255,255,.12)}
-.tile svg{position:absolute;left:50%;top:50%;width:64%;height:64%;transform:translate(-50%,-50%)}
 
 /* ---------- Scène 2 ---------- */
 #s2text{top:395px}
@@ -71,14 +64,19 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
 #pres{font-size:56px;font-weight:500;letter-spacing:.06em;opacity:.95}
 #bighub{display:inline-block;font-size:280px;font-weight:900;line-height:1;letter-spacing:-.01em;padding:0 .05em .04em;
   filter:drop-shadow(0 0 40px rgba(143,227,238,.28))}
-#card{position:absolute;left:560px;top:420px;width:800px;height:500px;padding:46px 70px;text-align:center}
-#card .logo{position:relative;display:inline-block;font-size:64px}
-#card h2{margin-top:30px;font-size:50px;font-weight:700;line-height:1.15}
-#card p{margin-top:14px;font-size:27px;font-weight:400;opacity:.72}
-#gbtn{position:relative;margin:44px auto 0;width:560px;height:88px;border-radius:999px;background:#fff;color:#1d2433;
-  display:flex;align-items:center;justify-content:center;gap:20px;font-size:32px;font-weight:600;overflow:hidden;
-  box-shadow:0 12px 30px rgba(0,0,0,.25)}
-#gbtn svg{width:40px;height:40px}
+/* Page de connexion (d'après la capture du hub) */
+#loginwrap{position:absolute;inset:0}
+#login{position:absolute;left:290px;top:120px;width:1340px;height:760px;border-radius:52px;background:rgba(255,255,255,.08)}
+#badge{position:absolute;left:62px;top:52px;width:64px;height:64px;border:2px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+#badge img{display:block;width:100%;height:100%}
+#login h2{position:absolute;left:86px;top:262px;width:620px;font-size:78px;font-weight:700;line-height:1.06;letter-spacing:-.01em}
+#login p{position:absolute;left:88px;top:462px;width:640px;font-size:31px;font-weight:400;line-height:1.3;opacity:.95}
+#lbox{position:absolute;left:668px;top:272px;width:572px;height:262px;border-radius:44px;padding:50px 66px 0;background:rgba(255,255,255,.10)}
+#lbox h3{font-size:27px;font-weight:700;line-height:1.3;color:#fff}
+#gbtn{position:relative;margin-top:34px;width:436px;height:72px;border-radius:999px;background:#fff;color:#1d2a44;
+  display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:600;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+#loginlogo{left:1480px;top:900px;font-size:66px}
+#loginlogo span{color:rgba(255,255,255,.72);background:none}
 #ripple{position:absolute;left:0;top:0;width:640px;height:640px;margin:-320px 0 0 -320px;border-radius:50%;background:rgba(63,182,216,.35);opacity:0}
 #cursor{position:absolute;left:0;top:0;width:62px;height:62px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
 #ring{position:absolute;left:0;top:0;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:50%;border:4px solid rgba(255,255,255,.85);opacity:0}
@@ -100,46 +98,39 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
   color:#ff5d8f;background:rgba(38,14,42,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
   text-shadow:0 0 30px rgba(255,93,143,.35);box-shadow:0 0 50px rgba(255,93,143,.30),inset 0 0 30px rgba(255,93,143,.25)}
 #stamp span{background:linear-gradient(100deg,#ff4d6d,#ff8fc8);-webkit-background-clip:text;background-clip:text;color:transparent}
-#adp{top:250px;font-size:96px;font-weight:800;line-height:1.12;padding:0 120px}
-#adp .w{display:inline-block;margin:0 .13em}
-#leetoWrap{position:absolute;left:830px;top:520px;width:260px;height:260px}
-#cse{top:820px;font-size:64px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:26px}
-#cse svg{width:74px;height:40px}
+#leetoWrap{position:absolute;left:820px;top:290px;width:280px;height:280px}
+#cse{top:650px;font-size:72px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:28px}
+#cse svg{width:80px;height:44px}
 
 /* ---------- Scène 5 ---------- */
-#hubheader{position:absolute;left:60px;top:36px;width:1800px;height:112px;border-radius:34px;display:flex;align-items:center;padding:0 44px}
-#hubheader .logo{position:relative;font-size:62px}
-#search{margin-left:80px;width:640px;height:62px;border-radius:999px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);
-  display:flex;align-items:center;padding:0 26px;gap:16px;font-size:25px;opacity:.75}
-#search svg{width:26px;height:26px}
-#hubheader .right{margin-left:auto;display:flex;align-items:center;gap:34px}
-#bell{position:relative;width:44px;height:44px}
-#bell i{position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#ff5d8f;border:2px solid #1b2f55}
-#avatar{width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,var(--cyan-1),#8a6cff);display:flex;align-items:center;justify-content:center;
-  border:2px solid rgba(255,255,255,.5)}
-#avatar svg{width:38px;height:38px}
-#hubtitle{position:absolute;left:170px;top:196px;font-size:38px;font-weight:700;opacity:.9}
-#hubtitle small{font-size:26px;font-weight:400;opacity:.65;margin-left:16px}
+#hubheader{position:absolute;left:0;top:0;width:1920px;height:128px;display:flex;align-items:center;padding:0 78px;
+  background:rgba(8,15,34,.55);border-bottom:1.5px solid rgba(255,255,255,.18);
+  -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
+#hubheader .logo{position:relative;font-size:70px}
 #apps{position:absolute;inset:0}
 .app{position:absolute;width:190px;height:190px}
 .app .ico{width:190px;height:190px}
-.app .lbl{position:absolute;left:50%;top:206px;width:290px;margin-left:-145px;text-align:center;font-size:28px;font-weight:700;line-height:1.15;color:#fff;
+.app .lbl{position:absolute;left:50%;top:210px;width:300px;margin-left:-150px;text-align:center;font-size:29px;font-weight:500;line-height:1.15;color:#fff;
   text-shadow:0 2px 10px rgba(5,12,30,.6)}
 .ghost{position:absolute;width:190px;height:190px;opacity:0}
 .ghost .ico{width:190px;height:190px;filter:none}
-#chatbot{position:absolute;right:70px;bottom:52px;display:flex;align-items:center;gap:22px}
-#chatbot .pill{padding:16px 30px;border-radius:999px;font-size:30px;font-weight:700}
-#hexwrap{width:128px;height:128px;filter:drop-shadow(0 0 16px rgba(127,208,214,.55))}
-#hex{width:128px;height:128px;clip-path:polygon(50% 0,93.3% 25%,93.3% 75%,50% 100%,6.7% 75%,6.7% 25%);
-  background:linear-gradient(150deg,#8fe3ee 0%,#3fb6d8 45%,#3d5fb8 100%);display:flex;align-items:center;justify-content:center}
-#hex svg{width:66px;height:66px}
 
 /* ---------- Scène 6 ---------- */
+#burst{position:absolute;inset:0;pointer-events:none}
+#core{position:absolute;left:660px;top:240px;width:600px;height:600px;border-radius:50%;opacity:0;
+  background:radial-gradient(circle,rgba(255,255,255,1) 0%,rgba(200,240,255,.85) 18%,rgba(143,227,238,.45) 38%,rgba(138,108,255,.15) 58%,transparent 72%)}
+.shock{position:absolute;left:810px;top:390px;width:300px;height:300px;border-radius:50%;opacity:0;
+  background:radial-gradient(circle,rgba(143,227,238,0) 52%,rgba(143,227,238,.35) 60%,rgba(235,250,255,.95) 66%,rgba(143,227,238,.35) 69%,rgba(143,227,238,0) 74%)}
+.spark{position:absolute;left:960px;top:540px;border-radius:50%;opacity:0}
+.streak{position:absolute;left:960px;top:540px;height:6px;width:260px;margin-top:-3px;border-radius:6px;opacity:0;transform-origin:0 50%;
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(220,245,255,.95))}
+#boom{position:absolute;inset:0;opacity:0;pointer-events:none;
+  background:radial-gradient(70% 70% at 50% 50%,rgba(255,255,255,1),rgba(210,240,255,.7) 40%,rgba(143,227,238,.25) 70%,rgba(143,227,238,0) 100%)}
 #fin{top:300px}
 #finhub{display:inline-block;font-size:260px;font-weight:900;line-height:1;padding:0 .05em .04em;filter:drop-shadow(0 0 44px rgba(143,227,238,.3))}
 #dispo{margin-top:22px;font-size:76px;font-weight:600}
-#pill{position:relative;display:inline-flex;margin-top:52px;padding:22px 64px 26px;border-radius:999px;font-size:62px;font-weight:700;overflow:hidden;letter-spacing:.01em}
-#pill .sh{position:absolute;top:0;bottom:0;left:0;width:180px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-300px) skewX(-20deg)}
+#pill{position:relative;display:inline-flex;margin-top:52px;padding:22px 60px 26px;border-radius:999px;font-size:60px;font-weight:700;overflow:hidden;letter-spacing:.01em}
+#pill .sh{position:absolute;top:0;bottom:0;left:0;width:200px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-300px) skewX(-20deg)}
 #logo2{right:84px;bottom:56px;font-size:72px}
 #logo2 span{padding-bottom:.1em}
 
@@ -167,15 +158,17 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
     <div id="pres">Beelix présente</div>
     <div id="bighub" class="hubgrad">LE HUB</div>
   </div>
-  <div id="card" class="glass">
-    <div class="logo"><span class="base">beelix</span></div>
-    <h2>Bienvenue sur le Hub Beelix</h2>
-    <p>Connectez-vous avec votre compte Beelix</p>
-    <div id="gbtn">
-      <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
-      <span>Continuer avec Google</span>
-      <div id="ripple"></div>
+  <div id="loginwrap">
+    <div id="login" class="glass">
+      <div id="badge"><img id="badgeImg" alt="Best Workplaces"></div>
+      <h2>Bienvenue sur le Hub Beelix</h2>
+      <p>Un seul endroit pour vos outils, vos ressources et votre montée en compétences.</p>
+      <div id="lbox" class="glass">
+        <h3>Besoin d'un outil, d'un document<br>ou d'une formation ?</h3>
+        <div id="gbtn"><span>Accéder à mes outils</span><div id="ripple"></div></div>
+      </div>
     </div>
+    <div id="loginlogo" class="logo"><span>beelix</span></div>
   </div>
   <div id="ring"></div>
   <div id="cursor"><svg viewBox="0 0 24 24" width="62" height="62"><path d="M4 2 L4 19.5 L8.4 15.6 L11.5 22.2 L14.6 20.8 L11.6 14.4 L17.6 14.4 Z" fill="#fff" stroke="#0d1a33" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
@@ -191,36 +184,25 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
     </div>
     <div id="stamp"><span>FINI !</span></div>
   </div>
-  <div id="adp" class="center-x"></div>
-  <div id="leetoWrap"><div class="ico" style="width:260px;height:260px"><img id="leetoImg" alt="Leeto"></div></div>
+  <div id="leetoWrap"><div class="ico" style="width:280px;height:280px"><img id="leetoImg" alt="Leeto"></div></div>
   <div id="cse" class="center-x"><span>CSE</span>
     <svg viewBox="0 0 74 40"><path d="M4 20h60M48 6l16 14-16 14" fill="none" stroke="#8fe3ee" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <span>en <span class="cyan">1 clic</span></span></div>
 
   <!-- Scène 5 : le HUB en action -->
-  <div id="hubheader" class="glass">
-    <div class="logo"><span class="base">beelix</span></div>
-    <div id="search"><svg viewBox="0 0 24 24" fill="none" stroke="#e6e8ff" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>Rechercher une application…</div>
-    <div class="right">
-      <div id="bell"><svg viewBox="0 0 24 24" width="44" height="44" fill="#e6e8ff"><path d="M12 2.5a6.5 6.5 0 0 0-6.5 6.5v3.6L3.6 16a1 1 0 0 0 .9 1.5h15a1 1 0 0 0 .9-1.5l-1.9-3.4V9A6.5 6.5 0 0 0 12 2.5zM9.2 19a2.9 2.9 0 0 0 5.6 0z"/></svg><i></i></div>
-      <div id="avatar"><svg viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.5" r="4.5"/><path d="M3.5 21c.8-4.4 4.3-7 8.5-7s7.7 2.6 8.5 7z"/></svg></div>
-    </div>
-  </div>
-  <div id="hubtitle">Mes applications <small>Tous vos liens utiles</small></div>
+  <div id="hubheader"><div class="logo"><span class="base">beelix</span></div></div>
   <div id="apps"></div>
-  <div id="chatbot">
-    <div class="pill glass">Chatbot</div>
-    <div id="hexwrap"><div id="hex"><svg viewBox="0 0 64 64" fill="#fff"><path d="M28 6c1.6 10.4 5.6 14.4 16 16-10.4 1.6-14.4 5.6-16 16-1.6-10.4-5.6-14.4-16-16 10.4-1.6 14.4-5.6 16-16z"/><path d="M47 34c.9 5.6 3 7.7 8.6 8.6-5.6.9-7.7 3-8.6 8.6-.9-5.6-3-7.7-8.6-8.6 5.6-.9 7.7-3 8.6-8.6z"/></svg></div></div>
-  </div>
 
   <!-- Scène 6 : final -->
   <div id="fin" class="center-x">
     <div id="finhub" class="hubgrad">LE HUB</div>
     <div id="dispo">disponible dès aujourd’hui</div>
-    <div id="pill" class="glass">hub.beelix.fr<span class="sh"></span></div>
+    <div id="pill" class="glass">https://hub.beelix.fr<span class="sh"></span></div>
   </div>
+  <div id="burst"><div id="core"></div></div>
   <div id="logo2" class="logo"><span class="base">beelix</span></div>
 
+  <div id="boom"></div>
   <div id="flash"></div>
 </div>
 
@@ -228,37 +210,27 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
 <script>
 (function(){
 const IMG = {
-  boond:"{{boond-manager}}", linkedin:"{{linkedin-learning}}", academy:"{{beelix-academy}}",
-  aleex:"{{aleex}}", leeto:"{{leeto}}"
+  boond:"{{boond-manager}}", linkedin:"{{linkedin-learning}}", academy:"{{beelix-academy}}", aleex:"{{aleex}}",
+  dt:"{{dossier-technique}}", leeto:"{{leeto}}", wonder:"{{wondermiles}}", paie:"{{fiches-de-paie}}", luma:"{{luma}}",
+  badge:"{{best-workplaces}}"
 };
-const NAVY = '#1b2f55';
-// Pictogrammes recréés (style verre dépoli bleu, pictogramme blanc)
-const PICTO = {
-  toolbox:`<svg viewBox="0 0 100 100"><path d="M37 31v-7a5 5 0 0 1 5-5h16a5 5 0 0 1 5 5v7" fill="none" stroke="#fff" stroke-width="7"/><rect x="12" y="31" width="76" height="52" rx="10" fill="#fff"/><rect x="12" y="49" width="76" height="5" fill="${NAVY}" opacity=".18"/><text x="50" y="72" text-anchor="middle" font-family="Outfit" font-weight="900" font-size="28" fill="${NAVY}">AI</text></svg>`,
-  payslip:`<svg viewBox="0 0 100 100"><path d="M26 10h34l18 18v58a5 5 0 0 1-5 5H26a5 5 0 0 1-5-5V15a5 5 0 0 1 5-5z" fill="#fff"/><path d="M60 10v13a5 5 0 0 0 5 5h13z" fill="#bfcbe4"/><rect x="31" y="34" width="22" height="5" rx="2.5" fill="${NAVY}" opacity=".55"/><rect x="31" y="45" width="38" height="5" rx="2.5" fill="${NAVY}" opacity=".35"/><rect x="31" y="56" width="30" height="5" rx="2.5" fill="${NAVY}" opacity=".35"/><text x="58" y="85" text-anchor="middle" font-family="Outfit" font-weight="800" font-size="24" fill="${NAVY}">€</text><rect x="31" y="67" width="38" height="2.5" rx="1.2" fill="${NAVY}" opacity=".25"/></svg>`,
-  palette:`<svg viewBox="0 0 100 100"><path d="M50 12C28 12 11 28 11 49s17 39 37 39c6 0 8.5-4.4 6.4-9.3-2-4.6.9-8.7 5.8-8.7H69c11.6 0 20-7.6 20-19.5C89 28.6 71.6 12 50 12z" fill="#fff"/><circle cx="31" cy="47" r="7" fill="${NAVY}"/><circle cx="41" cy="29" r="7" fill="${NAVY}" opacity=".8"/><circle cx="61" cy="27" r="7" fill="${NAVY}" opacity=".65"/><circle cx="75" cy="42" r="7" fill="${NAVY}" opacity=".5"/></svg>`,
-  folder:`<svg viewBox="0 0 100 100"><path d="M10 26a6 6 0 0 1 6-6h22l9 9h37a6 6 0 0 1 6 6v43a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6z" fill="#fff"/><path d="M10 38h80" stroke="${NAVY}" stroke-width="3" opacity=".18"/><path d="M41 52l-9 9 9 9M59 52l9 9-9 9" fill="none" stroke="${NAVY}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  wonder:`<svg viewBox="0 0 100 100"><text x="50" y="47" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="22" fill="#fff" letter-spacing="-.5">wonder</text><text x="50" y="70" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="22" fill="#fff" letter-spacing="-.5">miles</text><path d="M24 78c14 6 38 6 52 0" fill="none" stroke="#8fe3ee" stroke-width="3.5" stroke-linecap="round"/></svg>`
-};
-function iconHTML(key){
-  if (IMG[key]) return `<img src="${IMG[key]}" alt="">`;
-  return `<div class="tile">${PICTO[key]}</div>`;
-}
+const iconHTML = k => `<img src="${IMG[k]}" alt="">`;
 
-// Grille du HUB (ordre de la storyboard)
+// Grille du HUB (comme sur la plateforme : 5 + 4)
 const APPS = [
-  ['boond','Boond Manager'],['linkedin','LinkedIn Learning'],['toolbox','Toolbox IA'],['academy','Beelix Academy'],['aleex','Sensibilisation obligatoire'],
-  ['folder','Dossier technique'],['leeto','CSE'],['wonder','Wondermiles'],['payslip','Fiches de paie'],['palette','Branding']
+  ['boond','Boond Manager'],['linkedin','Linkedin Learning'],['academy','Beelix Academy'],['aleex','Aleex'],['dt','Dossier technique'],
+  ['leeto','Leeto'],['wonder','Wondermiles'],['paie','Fiches de paie'],['luma','Luma - Events']
 ];
-const COLX = i => 960 + ((i%5)-2)*318, ROWY = i => (i<5 ? 380 : 718);
+const COLX = i => 960 + ((i%5)-2)*300, ROWY = i => (i<5 ? 400 : 745);
 
 // PRNG déterministe
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-const rnd = mulberry32(20261001);
+const rnd = mulberry32(20261002);
 const R = (a,b)=>a+(b-a)*rnd();
 
 const $ = s=>document.querySelector(s);
-document.getElementById('leetoImg').src = IMG.leeto;
+$('#leetoImg').src = IMG.leeto;
+$('#badgeImg').src = IMG.badge;
 
 /* ---------- Fond ---------- */
 const BLOBS = [
@@ -296,9 +268,15 @@ APPS.forEach(([k,label],i)=>{
   $('#apps').appendChild(d); appEls.push(d); ghostEls.push(gs);
 });
 
-/* ---------- Texte ADP mot par mot ---------- */
-$('#adp').innerHTML = 'Les ADP ne recevront plus|ce genre de mails'.split('|')
-  .map(l=>'<div>'+l.split(' ').map(w=>`<span class="w">${w}</span>`).join('')+'</div>').join('');
+/* ---------- Explosion : onde de choc, étincelles, traits de vitesse ---------- */
+const shocks=[0,1].map(()=>{const d=document.createElement('div'); d.className='shock'; $('#burst').appendChild(d); return d;});
+const SPARK_COLORS=['255,255,255','143,227,238','63,182,216','200,190,255','255,160,210'];
+const sparks=[...Array(70)].map(()=>{const d=document.createElement('div'); d.className='spark';
+  const s=R(6,18), c=SPARK_COLORS[Math.floor(R(0,SPARK_COLORS.length))];
+  d.style.width=d.style.height=s+'px'; d.style.margin=(-s/2)+'px 0 0 '+(-s/2)+'px';
+  d.style.background=`rgba(${c},1)`; d.style.boxShadow=`0 0 ${s*1.6}px ${s*.5}px rgba(${c},.75)`;
+  $('#burst').appendChild(d); return d;});
+const streaks=[...Array(28)].map(()=>{const d=document.createElement('div'); d.className='streak'; $('#burst').appendChild(d); return d;});
 
 /* ---------- Saisie du mail ---------- */
 const MAIL = "Bonjour,\nC'est quoi la plateforme CSE svp ?";
@@ -320,7 +298,7 @@ function frame(t){
   const T0=3.9, TC=7.35, TCD=1.05;
   orbEls.forEach((el,i)=>{
     if(t<T0||t>TC+TCD){el.style.opacity=0;return;}
-    const k=clamp((t-TC)/TCD), ek=k*k*k;               // convergence power3.in
+    const k=clamp((t-TC)/TCD), ek=k*k*k;
     const ang=i*Math.PI/2+.6+(t-T0)*.32+ek*1.2;
     const r=1-ek, x=960+Math.cos(ang)*870*r, y=560+Math.sin(ang)*410*r;
     const fade=clamp((t-T0)/.8);
@@ -347,24 +325,20 @@ gsap.set('#sub',{opacity:0,y:30,filter:'blur(10px)'});
 gsap.set('#s2text',{filter:'blur(0px)'});
 gsap.set('#pres',{opacity:0,y:24});
 gsap.set('#bighub',{opacity:0,scale:2.6,filter:'blur(24px) drop-shadow(0 0 40px rgba(143,227,238,.28))'});
-gsap.set('#s3head',{filter:'blur(0px)',transformOrigin:'50% 0%'});
-gsap.set('#card',{opacity:0,y:640,filter:'blur(0px)'});
-gsap.set('#cursor',{x:1560,y:1160,opacity:0,transformOrigin:'10px 5px',filter:'blur(0px) drop-shadow(0 6px 10px rgba(0,0,0,.4))'});
+gsap.set('#s3head',{filter:'blur(0px)'});
+gsap.set('#login',{opacity:0,y:620});
+gsap.set('#loginlogo',{opacity:0,y:30});
+gsap.set('#loginwrap',{filter:'blur(0px)'});
+gsap.set('#cursor',{x:1700,y:1160,opacity:0,transformOrigin:'10px 5px',filter:'blur(0px) drop-shadow(0 6px 10px rgba(0,0,0,.4))'});
 gsap.set('#mail',{opacity:0,scale:.88,y:70,filter:'blur(12px)'});
 gsap.set('#mailwrap',{filter:'blur(0px)',transformOrigin:'50% 50%'});
 gsap.set('#stamp',{xPercent:-50,yPercent:-50,opacity:0,scale:2.8,rotation:-26});
-gsap.set('#adp .w',{opacity:0,y:50,filter:'blur(12px)'});
-gsap.set('#adp',{filter:'blur(0px)'});
 gsap.set('#leetoWrap',{opacity:0,scale:0,rotation:-14,filter:'blur(0px)'});
 gsap.set('#cse',{opacity:0,y:30,filter:'blur(0px)'});
-gsap.set('#hubheader',{opacity:0,y:-170,filter:'blur(0px)'});
-gsap.set('#hubtitle',{opacity:0,x:-40,filter:'blur(0px)'});
+gsap.set('#hubheader',{opacity:0,y:-140,filter:'blur(0px)'});
 gsap.set('.app .ico',{opacity:0,scale:.3,y:50});
 gsap.set('.app .lbl',{opacity:0,y:14});
-gsap.set('#chatbot',{opacity:0,filter:'blur(0px)'});
-gsap.set('#hexwrap',{scale:0,rotation:-60});
-gsap.set('#chatbot .pill',{opacity:0,x:40});
-gsap.set('#finhub',{opacity:0,scale:.45,filter:'blur(22px) drop-shadow(0 0 44px rgba(143,227,238,.3))'});
+gsap.set('#finhub',{opacity:0,scale:.3,filter:'blur(22px) drop-shadow(0 0 44px rgba(143,227,238,.3))'});
 gsap.set('#dispo',{opacity:0,y:36,filter:'blur(10px)'});
 gsap.set('#pill',{opacity:0,scale:.8,y:20});
 gsap.set('#logo2',{opacity:0,y:24});
@@ -388,14 +362,16 @@ tl.to('#pres',{opacity:.95,y:0,duration:.7},9.05)
   .to('#bighub',{opacity:1,scale:1,filter:'blur(0px) drop-shadow(0 0 40px rgba(143,227,238,.28))',duration:.55,ease:'expo.out'},9.7)
   .fromTo('#flash',{opacity:0},{opacity:.75,duration:.1,ease:'power1.in'},9.76)
   .to('#flash',{opacity:0,duration:.7,ease:'power2.out'},9.86)
-  .to('#s3head',{y:-185,scale:.5,duration:.95,ease:'power3.inOut'},10.85)
-  .to('#card',{opacity:1,y:0,duration:1.05,ease:'power3.out'},11.0);
-// curseur + clic sur le bouton Google
-const card=$('#card'), btn=$('#gbtn');
-const BX = card.offsetLeft + btn.offsetLeft + btn.offsetWidth*0.5 + 70;
-const BY = card.offsetTop + btn.offsetTop + btn.offsetHeight*0.55;
+  .to('#s3head',{opacity:0,scale:1.15,filter:'blur(18px)',duration:.6,ease:'power2.in'},10.75)
+  .to('#login',{opacity:1,y:0,duration:1.05,ease:'power3.out'},10.95)
+  .to('#loginlogo',{opacity:1,y:0,duration:.7},11.5);
+// curseur + clic sur « Accéder à mes outils »
+const login=$('#login'), lbox=$('#lbox'), btn=$('#gbtn');
+const BXr = btn.offsetWidth*0.55, BYr = btn.offsetHeight*0.55;
+const BX = login.offsetLeft + lbox.offsetLeft + btn.offsetLeft + BXr;
+const BY = login.offsetTop + lbox.offsetTop + btn.offsetTop + BYr;
 gsap.set('#ring',{x:BX,y:BY,scale:.2});
-gsap.set('#ripple',{x:btn.offsetWidth*0.5+70,y:btn.offsetHeight*0.55,scale:0});
+gsap.set('#ripple',{x:BXr,y:BYr,scale:0});
 tl.to('#cursor',{opacity:1,duration:.3,ease:'none'},11.95)
   .to('#cursor',{x:BX-10,y:BY-5,duration:1.05,ease:'power2.inOut'},11.95)
   .to('#cursor',{scale:.8,duration:.09,ease:'power1.in'},13.05)
@@ -404,73 +380,107 @@ tl.to('#cursor',{opacity:1,duration:.3,ease:'none'},11.95)
   .to('#gbtn',{scale:1,duration:.35,ease:'back.out(3)'},13.14)
   .fromTo('#ripple',{scale:0,opacity:.75},{immediateRender:false,scale:1,opacity:0,duration:.75,ease:'power2.out'},13.1)
   .fromTo('#ring',{scale:.2,opacity:.9},{immediateRender:false,scale:1.25,opacity:0,duration:.65,ease:'power2.out'},13.1)
-  .to(['#s3head','#card'],{opacity:0,filter:'blur(14px)',duration:.6,ease:'power2.in'},13.6)
-  .to('#cursor',{opacity:0,filter:'blur(14px) drop-shadow(0 6px 10px rgba(0,0,0,.4))',duration:.6,ease:'power2.in'},13.6)
-  .to('#card',{y:-40,duration:.6,ease:'power2.in'},13.6);
+  .to('#loginwrap',{opacity:0,filter:'blur(14px)',y:-40,duration:.6,ease:'power2.in'},13.6)
+  .to('#cursor',{opacity:0,filter:'blur(14px) drop-shadow(0 6px 10px rgba(0,0,0,.4))',duration:.6,ease:'power2.in'},13.6);
 
 /* SCÈNE 4 — Le problème qui disparaît (14 → 21 s) */
 tl.to('#mail',{opacity:1,scale:1,y:0,filter:'blur(0px)',duration:.85},14.05)
   .to('#stamp',{opacity:1,scale:1,rotation:-12,duration:.3,ease:'power4.in'},17.75)
   .to('#mail',{x:'+=12',duration:.045,yoyo:true,repeat:5,ease:'sine.inOut'},18.05)
   .to('#stamp',{scale:1.05,duration:.12,yoyo:true,repeat:1,ease:'sine.out'},18.05)
-  .to('#mailwrap',{scale:.12,opacity:0,filter:'blur(10px)',duration:.6,ease:'power3.in'},18.65)
-  .to('#adp .w',{opacity:1,y:0,filter:'blur(0px)',duration:.6,stagger:.075},19.15)
-  .to('#leetoWrap',{opacity:1,scale:1,rotation:0,duration:.85,ease:'back.out(2.4)'},19.95)
-  .to('#cse',{opacity:1,y:0,duration:.6},20.3)
-  .to(['#adp','#leetoWrap','#cse'],{opacity:0,y:'-=30',filter:'blur(12px)',duration:.5,ease:'power2.in'},20.6);
+  .to('#mailwrap',{scale:.12,opacity:0,filter:'blur(10px)',duration:.6,ease:'power3.in'},18.75)
+  .to('#leetoWrap',{opacity:1,scale:1,rotation:0,duration:.85,ease:'back.out(2.4)'},19.3)
+  .to('#cse',{opacity:1,y:0,duration:.6},19.7)
+  .to(['#leetoWrap','#cse'],{opacity:0,y:'-=30',filter:'blur(12px)',duration:.5,ease:'power2.in'},20.6);
 
 /* SCÈNE 5 — Le HUB en action (21 → 26 s) */
 tl.to('#hubheader',{opacity:1,y:0,duration:.8},21.0)
-  .to('#hubtitle',{opacity:1,x:0,duration:.7},21.3)
-  .to('.app .ico',{opacity:1,scale:1,y:0,duration:.6,ease:'back.out(1.9)',stagger:.11},21.5)
-  .to('.app .lbl',{opacity:1,y:0,duration:.45,stagger:.11},21.68)
-  .to('#chatbot',{opacity:1,duration:.3,ease:'none'},23.15)
-  .to('#hexwrap',{scale:1,rotation:0,duration:.75,ease:'back.out(2)'},23.15)
-  .to('#chatbot .pill',{opacity:1,x:0,duration:.6},23.45)
-  .fromTo('#hexwrap',{filter:'drop-shadow(0 0 16px rgba(127,208,214,.55))'},{filter:'drop-shadow(0 0 34px rgba(127,208,214,.95))',duration:.55,yoyo:true,repeat:3,ease:'sine.inOut'},23.9)
-  // mise en avant de la tuile CSE
-  .to(appEls[6].querySelector('.ico'),{scale:1.1,y:-8,duration:.4,ease:'power2.out'},24.3)
-  .to(appEls[6].querySelector('.ico'),{scale:1,y:0,duration:.5,ease:'power2.inOut'},24.95);
+  .to('.app .ico',{opacity:1,scale:1,y:0,duration:.6,ease:'back.out(1.9)',stagger:.12},21.45)
+  .to('.app .lbl',{opacity:1,y:0,duration:.45,stagger:.12},21.63)
+  // mise en avant de la tuile Leeto (CSE)
+  .to(appEls[5].querySelector('.ico'),{scale:1.1,y:-8,duration:.4,ease:'power2.out'},24.1)
+  .to(appEls[5].querySelector('.ico'),{scale:1,y:0,duration:.5,ease:'power2.inOut'},24.75);
 
-/* SCÈNE 6 — Final « envol des icônes » (26 → 32 s) */
-tl.to(['#hubheader','#hubtitle','#chatbot'],{opacity:0,filter:'blur(12px)',duration:.5,ease:'power2.in'},25.85)
+/* SCÈNE 6 — Final « explosion des icônes » (26 → 32 s) */
+const TB = 27.2;  // instant de l'explosion
+tl.to('#hubheader',{opacity:0,filter:'blur(12px)',duration:.5,ease:'power2.in'},25.85)
   .to('.app .lbl',{opacity:0,duration:.3,ease:'power1.in'},25.85);
+const N = APPS.length;
 const FLY = APPS.map((a,i)=>{
-  const ca=R(0,Math.PI*2), cr=R(10,85);
-  const g={x:960+Math.cos(ca)*cr-COLX(i), y:545+Math.sin(ca)*cr*.8-ROWY(i), rotation:R(-25,25), scale:R(.62,.78)};
-  // direction : vers le haut et les bords (éventail de -165° à -15°, plus quelques-unes vers les côtés)
-  const ang = (-170 + i*(160/9) + R(-7,7)) * Math.PI/180;
-  const dist = R(1250,1550);
-  const e={x:g.x+Math.cos(ang)*dist, y:g.y+Math.sin(ang)*dist*.85 - R(80,260), rotation:g.rotation+R(-220,220), scale:R(.55,1.05)};
-  return {g,e,st:27.22+R(0,.16),d:R(1.65,2.05)};
+  const ca=R(0,Math.PI*2), cr=R(0,46);
+  const g={x:960+Math.cos(ca)*cr-COLX(i), y:540+Math.sin(ca)*cr-ROWY(i), rotation:R(-30,30), scale:R(.55,.68)};
+  // projection radiale sur 360°, très rapide au départ
+  const ang = (i/N)*Math.PI*2 + R(-.22,.22) - Math.PI/2;
+  const dist = R(1450,1900);
+  const e={x:g.x+Math.cos(ang)*dist, y:g.y+Math.sin(ang)*dist, rotation:g.rotation+R(-540,540), scale:R(1.2,1.7)};
+  return {g,e,st:TB+R(0,.04),d:R(1.0,1.3)};
 });
-// ordre de superposition aléatoire dans l'amas
-FLY.forEach((f,i)=>{ const el=appEls[i];
-  tl.to(el,{x:f.g.x,y:f.g.y,rotation:f.g.rotation,scale:f.g.scale,duration:.8,ease:'power3.inOut'},26.0+i*.025);
+// aspiration vers le centre
+FLY.forEach((f,i)=>{
+  tl.to(appEls[i],{x:f.g.x,y:f.g.y,rotation:f.g.rotation,scale:f.g.scale,duration:.75,ease:'power3.in'},25.95+i*.03);
 });
-tl.to('#apps',{scale:.93,duration:.35,ease:'sine.inOut'},26.86)
-  .to('#apps',{scale:1,duration:.45,ease:'back.out(3)'},27.2);
+// tension : l'amas se comprime et tremble, le noyau lumineux grossit
+tl.to('#apps',{scale:.86,duration:.5,ease:'power2.in'},26.7)
+  .fromTo('#core',{opacity:0,scale:.2},{opacity:.95,scale:.75,duration:.5,ease:'power2.in'},26.7);
+for(let k=0;k<10;k++){
+  const a=2+k*.9;
+  tl.to('#apps',{x:R(-a,a),y:R(-a,a),duration:.05,ease:'none'},26.7+k*.05);
+}
+tl.set('#apps',{x:0,y:0},TB);
+// BOUM
+tl.to('#apps',{scale:1,duration:.25,ease:'power4.out'},TB)
+  .fromTo('#boom',{opacity:0},{opacity:.95,duration:.06,ease:'none'},TB)
+  .to('#boom',{opacity:0,duration:.75,ease:'power2.out'},TB+.06)
+  .to('#core',{scale:2.4,opacity:0,duration:.7,ease:'expo.out'},TB);
+shocks.forEach((s,k)=>{
+  const t0=TB+k*.1, d=.9+k*.3;
+  tl.fromTo(s,{scale:.2},{immediateRender:false,scale:6+k*2,duration:d,ease:'expo.out'},t0)
+    .set(s,{opacity:.95-k*.25},t0)
+    .to(s,{opacity:0,duration:d*.8,ease:'power2.in'},t0+.05);
+});
+sparks.forEach(s=>{
+  const a=R(0,Math.PI*2), d=R(380,1250), dur=R(.8,1.5);
+  tl.fromTo(s,{x:0,y:0,opacity:0,scale:1},{immediateRender:false,x:Math.cos(a)*d,y:Math.sin(a)*d,scale:R(.2,.5),duration:dur,ease:'expo.out'},TB)
+    .fromTo(s,{opacity:0},{immediateRender:false,opacity:1,duration:.03,ease:'none'},TB)
+    .to(s,{opacity:0,duration:dur*.6,ease:'power2.in'},TB+dur*.35);
+});
+streaks.forEach((s,k)=>{
+  const a=(k/streaks.length)*360+R(-6,6), len=R(.8,1.6);
+  gsap.set(s,{rotation:a});
+  tl.fromTo(s,{x:Math.cos(a*Math.PI/180)*60,y:Math.sin(a*Math.PI/180)*60,scaleX:.1,opacity:0},
+      {immediateRender:false,x:Math.cos(a*Math.PI/180)*R(500,800),y:Math.sin(a*Math.PI/180)*R(500,800),scaleX:len,duration:.55,ease:'expo.out'},TB)
+    .fromTo(s,{opacity:0},{immediateRender:false,opacity:.9,duration:.03,ease:'none'},TB)
+    .to(s,{opacity:0,duration:.35,ease:'power2.in'},TB+.2);
+});
+// secousse de l'écran
+for(let k=0;k<8;k++){
+  const a=26*(1-k/8);
+  tl.to(['#bg','#fin','#burst'],{x:R(-a,a),y:R(-a,a),duration:.045,ease:'none'},TB+k*.045);
+}
+tl.to(['#bg','#fin','#burst'],{x:0,y:0,duration:.08,ease:'power1.out'},TB+.36);
+// projection des icônes + traînées
 function flight(el,f,delay,peak){
-  tl.to(el,{x:f.e.x,duration:f.d,ease:'power2.out'},f.st+delay)
-    .to(el,{y:f.e.y,duration:f.d,ease:'power1.in'},f.st+delay)
-    .to(el,{rotation:f.e.rotation,scale:f.e.scale,duration:f.d,ease:'power1.out'},f.st+delay)
-    .to(el,{opacity:0,duration:.55,ease:'power1.in'},f.st+delay+f.d-.55);
+  tl.to(el,{x:f.e.x,y:f.e.y,duration:f.d,ease:'expo.out'},f.st+delay)
+    .to(el,{rotation:f.e.rotation,scale:f.e.scale,duration:f.d,ease:'power2.out'},f.st+delay)
+    .to(el,{opacity:0,duration:.45,ease:'power1.in'},f.st+delay+f.d-.55);
   if(peak!==undefined){
     tl.set(el,{x:f.g.x,y:f.g.y,rotation:f.g.rotation,scale:f.g.scale,opacity:peak},f.st+delay-.001);
   }
 }
 FLY.forEach((f,i)=>{
   flight(appEls[i],f,0);
-  flight(ghostEls[i][0],f,.055,.38);
-  flight(ghostEls[i][1],f,.11,.18);
+  flight(ghostEls[i][0],f,.025,.45);
+  flight(ghostEls[i][1],f,.05,.22);
 });
-gsap.set(ghostEls.map(g=>g[0]),{filter:'blur(3px) drop-shadow(0 0 18px rgba(143,227,238,.8))'});
-gsap.set(ghostEls.map(g=>g[1]),{filter:'blur(7px) drop-shadow(0 0 24px rgba(143,227,238,.8))'});
+gsap.set(ghostEls.map(g=>g[0]),{filter:'blur(4px) drop-shadow(0 0 18px rgba(143,227,238,.9))'});
+gsap.set(ghostEls.map(g=>g[1]),{filter:'blur(9px) drop-shadow(0 0 24px rgba(143,227,238,.9))'});
 
-tl.to('#finhub',{opacity:1,scale:1,filter:'blur(0px) drop-shadow(0 0 44px rgba(143,227,238,.3))',duration:1.05,ease:'back.out(1.5)'},27.4)
+// texte final révélé par l'explosion
+tl.to('#finhub',{opacity:1,scale:1,duration:.8,ease:'back.out(2.2)'},TB+.08)
+  .to('#finhub',{filter:'blur(0px) drop-shadow(0 0 44px rgba(143,227,238,.3))',duration:.6,ease:'power3.out'},TB+.08)
   .to('#dispo',{opacity:1,y:0,filter:'blur(0px)',duration:.8},28.0)
   .to('#pill',{opacity:1,scale:1,y:0,duration:.8,ease:'back.out(1.8)'},28.4)
-  .fromTo('#pill .sh',{x:-300},{x:760,duration:.95,ease:'power2.inOut'},29.0)
+  .fromTo('#pill .sh',{x:-300},{x:960,duration:1.0,ease:'power2.inOut'},29.0)
   .to('#logo2',{opacity:.9,y:0,duration:.8},29.1);
 // image finale figée jusqu'à 32 s
 tl.set({}, {}, 32);

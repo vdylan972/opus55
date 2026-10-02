@@ -25,7 +25,7 @@ node render.js --only=5,12.5   # captures de contrôle à des instants précis
 |---|---|---|
 | 1 | 0 → 4 s | Logo beelix, reflet lumineux, remontée |
 | 2 | 4 → 9 s | « Une plateforme UNIQUE » / « pour retrouver tous les liens utiles », icônes en orbite qui convergent |
-| 3 | 9 → 14 s | « Beelix présente » → « LE HUB » (zoom + flash), carte de connexion, clic sur « Continuer avec Google » |
-| 4 | 14 → 21 s | Mail tapé à rh@beelix.fr, tampon « FINI ! », « Les ADP ne recevront plus ce genre de mails », Leeto « CSE → en 1 clic » |
-| 5 | 21 → 26 s | Page du hub : header, grille de 10 applications en cascade, bouton Chatbot |
-| 6 | 26 → 32 s | Rassemblement puis envol des icônes, « LE HUB / disponible dès aujourd’hui / hub.beelix.fr », image figée de 30 à 32 s |
+| 3 | 9 → 14 s | « Beelix présente » → « LE HUB » (zoom + flash), page d'accueil du hub, clic sur « Accéder à mes outils » |
+| 4 | 14 → 21 s | Mail tapé à rh@beelix.fr, tampon « FINI ! », Leeto « CSE → en 1 clic » |
+| 5 | 21 → 26 s | Page du hub : header, grille de 9 applications (5 + 4) en cascade |
+| 6 | 26 → 32 s | Aspiration des icônes, explosion (flash, ondes de choc, étincelles, secousse), « LE HUB / disponible dès aujourd’hui / https://hub.beelix.fr », image figée de 30 à 32 s |
