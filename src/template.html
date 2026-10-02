@@ -46,6 +46,10 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
 .logo .shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%);
   background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
 
+.logoimg{position:absolute}
+.logoimg img{display:block;width:100%;height:auto}
+.lshine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%);
+  background-size:300% 100%;background-position:100% 0;-webkit-mask-size:100% 100%;mask-size:100% 100%}
 /* Icônes */
 .ico{position:relative;border-radius:22%;filter:drop-shadow(0 14px 26px rgba(3,8,25,.45))}
 .ico img{display:block;width:100%;height:100%}
@@ -69,14 +73,14 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
 #login{position:absolute;left:290px;top:120px;width:1340px;height:760px;border-radius:52px;background:rgba(255,255,255,.08)}
 #badge{position:absolute;left:62px;top:52px;width:64px;height:64px;border:2px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.25)}
 #badge img{display:block;width:100%;height:100%}
-#login h2{position:absolute;left:86px;top:262px;width:620px;font-size:78px;font-weight:700;line-height:1.06;letter-spacing:-.01em}
-#login p{position:absolute;left:88px;top:462px;width:640px;font-size:31px;font-weight:400;line-height:1.3;opacity:.95}
-#lbox{position:absolute;left:668px;top:272px;width:572px;height:262px;border-radius:44px;padding:50px 66px 0;background:rgba(255,255,255,.10)}
+#login h2{position:absolute;left:86px;top:262px;width:600px;font-size:74px;font-weight:700;line-height:1.06;letter-spacing:-.01em}
+#login p{position:absolute;left:88px;top:452px;width:560px;font-size:29px;font-weight:400;line-height:1.3;opacity:.95}
+#lbox{position:absolute;left:706px;top:272px;width:572px;height:262px;border-radius:44px;padding:50px 66px 0;background:rgba(255,255,255,.10)}
 #lbox h3{font-size:27px;font-weight:700;line-height:1.3;color:#fff}
 #gbtn{position:relative;margin-top:34px;width:436px;height:72px;border-radius:999px;background:#fff;color:#1d2a44;
   display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:600;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.18)}
-#loginlogo{left:1480px;top:900px;font-size:66px}
-#loginlogo span{color:rgba(255,255,255,.72);background:none}
+#loginlogo{left:1440px;top:915px;width:230px}
+#loginlogo img{filter:brightness(0) invert(1);opacity:.75}
 #ripple{position:absolute;left:0;top:0;width:640px;height:640px;margin:-320px 0 0 -320px;border-radius:50%;background:rgba(63,182,216,.35);opacity:0}
 #cursor{position:absolute;left:0;top:0;width:62px;height:62px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
 #ring{position:absolute;left:0;top:0;width:170px;height:170px;margin:-85px 0 0 -85px;border-radius:50%;border:4px solid rgba(255,255,255,.85);opacity:0}
@@ -98,15 +102,11 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
   color:#ff5d8f;background:rgba(38,14,42,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
   text-shadow:0 0 30px rgba(255,93,143,.35);box-shadow:0 0 50px rgba(255,93,143,.30),inset 0 0 30px rgba(255,93,143,.25)}
 #stamp span{background:linear-gradient(100deg,#ff4d6d,#ff8fc8);-webkit-background-clip:text;background-clip:text;color:transparent}
-#leetoWrap{position:absolute;left:820px;top:290px;width:280px;height:280px}
-#cse{top:650px;font-size:72px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:28px}
-#cse svg{width:80px;height:44px}
 
 /* ---------- Scène 5 ---------- */
 #hubheader{position:absolute;left:0;top:0;width:1920px;height:128px;display:flex;align-items:center;padding:0 78px;
   background:rgba(8,15,34,.55);border-bottom:1.5px solid rgba(255,255,255,.18);
   -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
-#hubheader .logo{position:relative;font-size:70px}
 #apps{position:absolute;inset:0}
 .app{position:absolute;width:190px;height:190px}
 .app .ico{width:190px;height:190px}
@@ -131,8 +131,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
 #dispo{margin-top:22px;font-size:76px;font-weight:600}
 #pill{position:relative;display:inline-flex;margin-top:52px;padding:22px 60px 26px;border-radius:999px;font-size:60px;font-weight:700;overflow:hidden;letter-spacing:.01em}
 #pill .sh{position:absolute;top:0;bottom:0;left:0;width:200px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-300px) skewX(-20deg)}
-#logo2{right:84px;bottom:56px;font-size:72px}
-#logo2 span{padding-bottom:.1em}
+#logo2{right:84px;bottom:60px;width:250px}
 
 #flash{position:absolute;inset:0;background:radial-gradient(60% 55% at 50% 48%,rgba(235,240,255,.95),rgba(180,220,255,.25) 55%,transparent 80%);opacity:0;pointer-events:none}
 </style>
@@ -145,7 +144,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
   <div id="orbits" class="layer"></div>
 
   <!-- Scène 1 : logo -->
-  <div id="logo1" class="logo" style="font-size:220px;left:960px;top:540px"><span class="base">beelix</span><span class="shine">beelix</span></div>
+  <div id="logo1" class="logoimg" style="width:760px;left:960px;top:540px"><img class="limg" alt="beelix"><div class="lshine"></div></div>
 
   <!-- Scène 2 : la promesse -->
   <div id="s2text" class="center-x">
@@ -168,7 +167,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
         <div id="gbtn"><span>Accéder à mes outils</span><div id="ripple"></div></div>
       </div>
     </div>
-    <div id="loginlogo" class="logo"><span>beelix</span></div>
+    <div id="loginlogo" class="logoimg"><img class="limg" alt="beelix"></div>
   </div>
   <div id="ring"></div>
   <div id="cursor"><svg viewBox="0 0 24 24" width="62" height="62"><path d="M4 2 L4 19.5 L8.4 15.6 L11.5 22.2 L14.6 20.8 L11.6 14.4 L17.6 14.4 Z" fill="#fff" stroke="#0d1a33" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
@@ -184,13 +183,9 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
     </div>
     <div id="stamp"><span>FINI !</span></div>
   </div>
-  <div id="leetoWrap"><div class="ico" style="width:280px;height:280px"><img id="leetoImg" alt="Leeto"></div></div>
-  <div id="cse" class="center-x"><span>CSE</span>
-    <svg viewBox="0 0 74 40"><path d="M4 20h60M48 6l16 14-16 14" fill="none" stroke="#8fe3ee" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span>en <span class="cyan">1 clic</span></span></div>
 
   <!-- Scène 5 : le HUB en action -->
-  <div id="hubheader"><div class="logo"><span class="base">beelix</span></div></div>
+  <div id="hubheader"><div class="logoimg" style="position:relative;width:230px"><img class="limg" alt="beelix"></div></div>
   <div id="apps"></div>
 
   <!-- Scène 6 : final -->
@@ -200,7 +195,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
     <div id="pill" class="glass">https://hub.beelix.fr<span class="sh"></span></div>
   </div>
   <div id="burst"><div id="core"></div></div>
-  <div id="logo2" class="logo"><span class="base">beelix</span></div>
+  <div id="logo2" class="logoimg"><img class="limg" alt="beelix"></div>
 
   <div id="boom"></div>
   <div id="flash"></div>
@@ -212,7 +207,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Outfit'
 const IMG = {
   boond:"{{boond-manager}}", linkedin:"{{linkedin-learning}}", academy:"{{beelix-academy}}", aleex:"{{aleex}}",
   dt:"{{dossier-technique}}", leeto:"{{leeto}}", wonder:"{{wondermiles}}", paie:"{{fiches-de-paie}}", luma:"{{luma}}",
-  badge:"{{best-workplaces}}"
+  badge:"{{best-workplaces}}", logo:"{{logo-beelix}}"
 };
 const iconHTML = k => `<img src="${IMG[k]}" alt="">`;
 
@@ -229,8 +224,9 @@ const rnd = mulberry32(20261002);
 const R = (a,b)=>a+(b-a)*rnd();
 
 const $ = s=>document.querySelector(s);
-$('#leetoImg').src = IMG.leeto;
 $('#badgeImg').src = IMG.badge;
+document.querySelectorAll('.limg').forEach(i=>i.src=IMG.logo);
+{ const sh=$('#logo1 .lshine'); sh.style.webkitMaskImage=sh.style.maskImage=`url(${IMG.logo})`; }
 
 /* ---------- Fond ---------- */
 const BLOBS = [
@@ -287,7 +283,7 @@ const T_TYPED_END = T_TYPE + charT[charT.length-1] + .05;
 
 /* ---------- Rendu procédural (fond, orbite, saisie) ---------- */
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
-function blobTime(t){ if(t<28) return t; if(t<30){const u=(t-28)/2; return 28+(1-(1-u)*(1-u));} return 29; }
+function blobTime(t){ if(t<26.4) return t; if(t<28.4){const u=(t-26.4)/2; return 26.4+(1-(1-u)*(1-u));} return 27.4; }
 function frame(t){
   const bt=blobTime(t);
   BLOBS.forEach((b,i)=>{
@@ -333,8 +329,6 @@ gsap.set('#cursor',{x:1700,y:1160,opacity:0,transformOrigin:'10px 5px',filter:'b
 gsap.set('#mail',{opacity:0,scale:.88,y:70,filter:'blur(12px)'});
 gsap.set('#mailwrap',{filter:'blur(0px)',transformOrigin:'50% 50%'});
 gsap.set('#stamp',{xPercent:-50,yPercent:-50,opacity:0,scale:2.8,rotation:-26});
-gsap.set('#leetoWrap',{opacity:0,scale:0,rotation:-14,filter:'blur(0px)'});
-gsap.set('#cse',{opacity:0,y:30,filter:'blur(0px)'});
 gsap.set('#hubheader',{opacity:0,y:-140,filter:'blur(0px)'});
 gsap.set('.app .ico',{opacity:0,scale:.3,y:50});
 gsap.set('.app .lbl',{opacity:0,y:14});
@@ -345,7 +339,7 @@ gsap.set('#logo2',{opacity:0,y:24});
 
 /* SCÈNE 1 — Ouverture (0 → 4 s) */
 tl.to('#logo1',{opacity:1,scale:1,filter:'blur(0px)',duration:1.4},0.3)
-  .fromTo('#logo1 .shine',{backgroundPosition:'100% 0'},{backgroundPosition:'0% 0',duration:1.15,ease:'power2.inOut'},1.55)
+  .fromTo('#logo1 .lshine',{backgroundPosition:'100% 0'},{backgroundPosition:'0% 0',duration:1.15,ease:'power2.inOut'},1.55)
   .to('#logo1',{y:-405,scale:.4,duration:1.25,ease:'power3.inOut'},2.85);
 
 /* SCÈNE 2 — La promesse (4 → 9 s) */
@@ -383,28 +377,25 @@ tl.to('#cursor',{opacity:1,duration:.3,ease:'none'},11.95)
   .to('#loginwrap',{opacity:0,filter:'blur(14px)',y:-40,duration:.6,ease:'power2.in'},13.6)
   .to('#cursor',{opacity:0,filter:'blur(14px) drop-shadow(0 6px 10px rgba(0,0,0,.4))',duration:.6,ease:'power2.in'},13.6);
 
-/* SCÈNE 4 — Le problème qui disparaît (14 → 21 s) */
+/* SCÈNE 4 — Le problème qui disparaît (14 → 19,4 s) */
 tl.to('#mail',{opacity:1,scale:1,y:0,filter:'blur(0px)',duration:.85},14.05)
   .to('#stamp',{opacity:1,scale:1,rotation:-12,duration:.3,ease:'power4.in'},17.75)
   .to('#mail',{x:'+=12',duration:.045,yoyo:true,repeat:5,ease:'sine.inOut'},18.05)
   .to('#stamp',{scale:1.05,duration:.12,yoyo:true,repeat:1,ease:'sine.out'},18.05)
-  .to('#mailwrap',{scale:.12,opacity:0,filter:'blur(10px)',duration:.6,ease:'power3.in'},18.75)
-  .to('#leetoWrap',{opacity:1,scale:1,rotation:0,duration:.85,ease:'back.out(2.4)'},19.3)
-  .to('#cse',{opacity:1,y:0,duration:.6},19.7)
-  .to(['#leetoWrap','#cse'],{opacity:0,y:'-=30',filter:'blur(12px)',duration:.5,ease:'power2.in'},20.6);
+  .to('#mailwrap',{scale:.12,opacity:0,filter:'blur(10px)',duration:.6,ease:'power3.in'},18.75);
 
-/* SCÈNE 5 — Le HUB en action (21 → 26 s) */
-tl.to('#hubheader',{opacity:1,y:0,duration:.8},21.0)
-  .to('.app .ico',{opacity:1,scale:1,y:0,duration:.6,ease:'back.out(1.9)',stagger:.12},21.45)
-  .to('.app .lbl',{opacity:1,y:0,duration:.45,stagger:.12},21.63)
+/* SCÈNE 5 — Le HUB en action (19,4 → 24,4 s) */
+tl.to('#hubheader',{opacity:1,y:0,duration:.8},19.4)
+  .to('.app .ico',{opacity:1,scale:1,y:0,duration:.6,ease:'back.out(1.9)',stagger:.12},19.85)
+  .to('.app .lbl',{opacity:1,y:0,duration:.45,stagger:.12},20.03)
   // mise en avant de la tuile Leeto (CSE)
-  .to(appEls[5].querySelector('.ico'),{scale:1.1,y:-8,duration:.4,ease:'power2.out'},24.1)
-  .to(appEls[5].querySelector('.ico'),{scale:1,y:0,duration:.5,ease:'power2.inOut'},24.75);
+  .to(appEls[5].querySelector('.ico'),{scale:1.1,y:-8,duration:.4,ease:'power2.out'},22.5)
+  .to(appEls[5].querySelector('.ico'),{scale:1,y:0,duration:.5,ease:'power2.inOut'},23.15);
 
-/* SCÈNE 6 — Final « explosion des icônes » (26 → 32 s) */
-const TB = 27.2;  // instant de l'explosion
-tl.to('#hubheader',{opacity:0,filter:'blur(12px)',duration:.5,ease:'power2.in'},25.85)
-  .to('.app .lbl',{opacity:0,duration:.3,ease:'power1.in'},25.85);
+/* SCÈNE 6 — Final « explosion des icônes » (24,4 → 30,4 s) */
+const TB = 25.6;  // instant de l'explosion
+tl.to('#hubheader',{opacity:0,filter:'blur(12px)',duration:.5,ease:'power2.in'},24.25)
+  .to('.app .lbl',{opacity:0,duration:.3,ease:'power1.in'},24.25);
 const N = APPS.length;
 const FLY = APPS.map((a,i)=>{
   const ca=R(0,Math.PI*2), cr=R(0,46);
@@ -417,14 +408,14 @@ const FLY = APPS.map((a,i)=>{
 });
 // aspiration vers le centre
 FLY.forEach((f,i)=>{
-  tl.to(appEls[i],{x:f.g.x,y:f.g.y,rotation:f.g.rotation,scale:f.g.scale,duration:.75,ease:'power3.in'},25.95+i*.03);
+  tl.to(appEls[i],{x:f.g.x,y:f.g.y,rotation:f.g.rotation,scale:f.g.scale,duration:.75,ease:'power3.in'},24.35+i*.03);
 });
 // tension : l'amas se comprime et tremble, le noyau lumineux grossit
-tl.to('#apps',{scale:.86,duration:.5,ease:'power2.in'},26.7)
-  .fromTo('#core',{opacity:0,scale:.2},{opacity:.95,scale:.75,duration:.5,ease:'power2.in'},26.7);
+tl.to('#apps',{scale:.86,duration:.5,ease:'power2.in'},25.1)
+  .fromTo('#core',{opacity:0,scale:.2},{opacity:.95,scale:.75,duration:.5,ease:'power2.in'},25.1);
 for(let k=0;k<10;k++){
   const a=2+k*.9;
-  tl.to('#apps',{x:R(-a,a),y:R(-a,a),duration:.05,ease:'none'},26.7+k*.05);
+  tl.to('#apps',{x:R(-a,a),y:R(-a,a),duration:.05,ease:'none'},25.1+k*.05);
 }
 tl.set('#apps',{x:0,y:0},TB);
 // BOUM
@@ -478,12 +469,12 @@ gsap.set(ghostEls.map(g=>g[1]),{filter:'blur(9px) drop-shadow(0 0 24px rgba(143,
 // texte final révélé par l'explosion
 tl.to('#finhub',{opacity:1,scale:1,duration:.8,ease:'back.out(2.2)'},TB+.08)
   .to('#finhub',{filter:'blur(0px) drop-shadow(0 0 44px rgba(143,227,238,.3))',duration:.6,ease:'power3.out'},TB+.08)
-  .to('#dispo',{opacity:1,y:0,filter:'blur(0px)',duration:.8},28.0)
-  .to('#pill',{opacity:1,scale:1,y:0,duration:.8,ease:'back.out(1.8)'},28.4)
-  .fromTo('#pill .sh',{x:-300},{x:960,duration:1.0,ease:'power2.inOut'},29.0)
-  .to('#logo2',{opacity:.9,y:0,duration:.8},29.1);
-// image finale figée jusqu'à 32 s
-tl.set({}, {}, 32);
+  .to('#dispo',{opacity:1,y:0,filter:'blur(0px)',duration:.8},26.4)
+  .to('#pill',{opacity:1,scale:1,y:0,duration:.8,ease:'back.out(1.8)'},26.8)
+  .fromTo('#pill .sh',{x:-300},{x:960,duration:1.0,ease:'power2.inOut'},27.4)
+  .to('#logo2',{opacity:.9,y:0,duration:.8},27.5);
+// image finale figée jusqu'à 30.4 s
+tl.set({}, {}, 30.4);
 
 /* ---------- API de rendu ---------- */
 window.__tl = tl;
