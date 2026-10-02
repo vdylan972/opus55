@@ -30,6 +30,8 @@ const FRAMES = args.out || path.join(ROOT, '.frames');
   const t0 = Date.now();
   for (const t of times) {
     await page.evaluate(t => window.__seek(t), t);
+    // laisse le compositeur appliquer l'état avant la capture (évite des tuiles périmées)
+    await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
     const name = args.only ? `t_${t.toFixed(2)}.png` : `f_${String(Math.round(t * FPS)).padStart(5, '0')}.png`;
     await page.screenshot({ path: path.join(FRAMES, name) });
     const f = Math.round(t * FPS);

@@ -25,7 +25,7 @@ node render.js --only=5,12.5   # captures de contrôle à des instants précis
 |---|---|---|
 | 1 | 0 → 4 s | Logo beelix officiel, reflet lumineux, remontée |
 | 2 | 4 → 9 s | « Une plateforme UNIQUE » / « pour retrouver tous les liens utiles », icônes en orbite qui convergent |
-| 3 | 9 → 14 s | « Beelix présente » → « LE HUB » (zoom + flash), page d'accueil du hub, clic sur « Accéder à mes outils » |
-| 4 | 14 → 19,4 s | Mail tapé à rh@beelix.fr, tampon « FINI ! », la fenêtre disparaît |
+| 3 | 9 → 14,35 s | Le problème : mail tapé à rh@beelix.fr, tampon « FINI ! », la fenêtre disparaît |
+| 4 | 14,35 → 19,5 s | « Beelix présente » → « LE HUB » (zoom + flash), page d'accueil du hub, clic sur « Accéder à mes outils » |
 | 5 | 19,4 → 24,4 s | Page du hub : header, grille de 9 applications (5 + 4) en cascade |
 | 6 | 24,4 → 30,4 s | Aspiration des icônes, explosion (flash, ondes de choc, étincelles, secousse), « LE HUB / disponible dès aujourd’hui / https://hub.beelix.fr », image figée de 28,4 à 30,4 s |

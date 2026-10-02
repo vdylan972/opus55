@@ -276,7 +276,7 @@ const streaks=[...Array(28)].map(()=>{const d=document.createElement('div'); d.c
 
 /* ---------- Saisie du mail ---------- */
 const MAIL = "Bonjour,\nC'est quoi la plateforme CSE svp ?";
-const T_TYPE = 15.0;
+const T_TYPE = 10.0;
 const charT = []; { let acc=0; for (let i=0;i<MAIL.length;i++){ charT.push(acc); const ch=MAIL[i];
   acc += ch===',' ? .10 : ch==='\n' ? .26 : ch===' ' ? .065 : R(.035,.06); } }
 const T_TYPED_END = T_TYPE + charT[charT.length-1] + .05;
@@ -307,7 +307,7 @@ function frame(t){
   let n=0; for(let i=0;i<charT.length;i++){ if(t>=T_TYPE+charT[i]) n=i+1; }
   $('#typed').textContent=MAIL.slice(0,n);
   const typing = t>=T_TYPE && t<T_TYPED_END+.15;
-  const caretOn = t<14.5 || t>17.65 ? 0 : (typing ? 1 : (Math.floor((t-14.5)/.5)%2===0 ? 1 : 0));
+  const caretOn = t<9.5 || t>12.65 ? 0 : (typing ? 1 : (Math.floor((t-9.5)/.5)%2===0 ? 1 : 0));
   $('#caret').style.opacity=caretOn;
 }
 
@@ -351,14 +351,21 @@ tl.to('#w1',{opacity:1,y:0,filter:'blur(0px)',duration:.6},4.0)
   .to('#sub',{opacity:.92,y:0,filter:'blur(0px)',duration:.8},6.0)
   .to(['#s2text','#logo1'],{opacity:0,filter:'blur(16px)',y:'-=30',duration:.6,ease:'power2.in'},8.4);
 
-/* SCÈNE 3 — La révélation (9 → 14 s) */
-tl.to('#pres',{opacity:.95,y:0,duration:.7},9.05)
-  .to('#bighub',{opacity:1,scale:1,filter:'blur(0px) drop-shadow(0 0 40px rgba(143,227,238,.28))',duration:.55,ease:'expo.out'},9.7)
-  .fromTo('#flash',{opacity:0},{opacity:.75,duration:.1,ease:'power1.in'},9.76)
-  .to('#flash',{opacity:0,duration:.7,ease:'power2.out'},9.86)
-  .to('#s3head',{opacity:0,scale:1.15,filter:'blur(18px)',duration:.6,ease:'power2.in'},10.75)
-  .to('#login',{opacity:1,y:0,duration:1.05,ease:'power3.out'},10.95)
-  .to('#loginlogo',{opacity:1,y:0,duration:.7},11.5);
+/* SCÈNE 3 — Le problème qui disparaît (9 → 14,35 s) */
+tl.to('#mail',{opacity:1,scale:1,y:0,filter:'blur(0px)',duration:.85},9.05)
+  .to('#stamp',{opacity:1,scale:1,rotation:-12,duration:.3,ease:'power4.in'},12.75)
+  .to('#mail',{x:'+=12',duration:.045,yoyo:true,repeat:5,ease:'sine.inOut'},13.05)
+  .to('#stamp',{scale:1.05,duration:.12,yoyo:true,repeat:1,ease:'sine.out'},13.05)
+  .to('#mailwrap',{scale:.12,opacity:0,filter:'blur(10px)',duration:.6,ease:'power3.in'},13.75);
+
+/* SCÈNE 4 — La révélation + clic (14,35 → 19,5 s) */
+tl.to('#pres',{opacity:.95,y:0,duration:.7},14.35)
+  .to('#bighub',{opacity:1,scale:1,filter:'blur(0px) drop-shadow(0 0 40px rgba(143,227,238,.28))',duration:.55,ease:'expo.out'},15)
+  .fromTo('#flash',{opacity:0},{opacity:.75,duration:.1,ease:'power1.in'},15.06)
+  .to('#flash',{opacity:0,duration:.7,ease:'power2.out'},15.16)
+  .to('#s3head',{opacity:0,scale:1.15,filter:'blur(18px)',duration:.6,ease:'power2.in'},16.05)
+  .to('#login',{opacity:1,y:0,duration:1.05,ease:'power3.out'},16.25)
+  .to('#loginlogo',{opacity:1,y:0,duration:.7},16.8);
 // curseur + clic sur « Accéder à mes outils »
 const login=$('#login'), lbox=$('#lbox'), btn=$('#gbtn');
 const BXr = btn.offsetWidth*0.55, BYr = btn.offsetHeight*0.55;
@@ -366,23 +373,16 @@ const BX = login.offsetLeft + lbox.offsetLeft + btn.offsetLeft + BXr;
 const BY = login.offsetTop + lbox.offsetTop + btn.offsetTop + BYr;
 gsap.set('#ring',{x:BX,y:BY,scale:.2});
 gsap.set('#ripple',{x:BXr,y:BYr,scale:0});
-tl.to('#cursor',{opacity:1,duration:.3,ease:'none'},11.95)
-  .to('#cursor',{x:BX-10,y:BY-5,duration:1.05,ease:'power2.inOut'},11.95)
-  .to('#cursor',{scale:.8,duration:.09,ease:'power1.in'},13.05)
-  .to('#cursor',{scale:1,duration:.2,ease:'power2.out'},13.14)
-  .to('#gbtn',{scale:.965,duration:.09,ease:'power1.in'},13.05)
-  .to('#gbtn',{scale:1,duration:.35,ease:'back.out(3)'},13.14)
-  .fromTo('#ripple',{scale:0,opacity:.75},{immediateRender:false,scale:1,opacity:0,duration:.75,ease:'power2.out'},13.1)
-  .fromTo('#ring',{scale:.2,opacity:.9},{immediateRender:false,scale:1.25,opacity:0,duration:.65,ease:'power2.out'},13.1)
-  .to('#loginwrap',{opacity:0,filter:'blur(14px)',y:-40,duration:.6,ease:'power2.in'},13.6)
-  .to('#cursor',{opacity:0,filter:'blur(14px) drop-shadow(0 6px 10px rgba(0,0,0,.4))',duration:.6,ease:'power2.in'},13.6);
-
-/* SCÈNE 4 — Le problème qui disparaît (14 → 19,4 s) */
-tl.to('#mail',{opacity:1,scale:1,y:0,filter:'blur(0px)',duration:.85},14.05)
-  .to('#stamp',{opacity:1,scale:1,rotation:-12,duration:.3,ease:'power4.in'},17.75)
-  .to('#mail',{x:'+=12',duration:.045,yoyo:true,repeat:5,ease:'sine.inOut'},18.05)
-  .to('#stamp',{scale:1.05,duration:.12,yoyo:true,repeat:1,ease:'sine.out'},18.05)
-  .to('#mailwrap',{scale:.12,opacity:0,filter:'blur(10px)',duration:.6,ease:'power3.in'},18.75);
+tl.to('#cursor',{opacity:1,duration:.3,ease:'none'},17.25)
+  .to('#cursor',{x:BX-10,y:BY-5,duration:1.05,ease:'power2.inOut'},17.25)
+  .to('#cursor',{scale:.8,duration:.09,ease:'power1.in'},18.35)
+  .to('#cursor',{scale:1,duration:.2,ease:'power2.out'},18.44)
+  .to('#gbtn',{scale:.965,duration:.09,ease:'power1.in'},18.35)
+  .to('#gbtn',{scale:1,duration:.35,ease:'back.out(3)'},18.44)
+  .fromTo('#ripple',{scale:0,opacity:.75},{immediateRender:false,scale:1,opacity:0,duration:.75,ease:'power2.out'},18.4)
+  .fromTo('#ring',{scale:.2,opacity:.9},{immediateRender:false,scale:1.25,opacity:0,duration:.65,ease:'power2.out'},18.4)
+  .to('#loginwrap',{opacity:0,filter:'blur(14px)',y:-40,duration:.6,ease:'power2.in'},18.9)
+  .to('#cursor',{opacity:0,filter:'blur(14px) drop-shadow(0 6px 10px rgba(0,0,0,.4))',duration:.6,ease:'power2.in'},18.9);
 
 /* SCÈNE 5 — Le HUB en action (19,4 → 24,4 s) */
 tl.to('#hubheader',{opacity:1,y:0,duration:.8},19.4)
